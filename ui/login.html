@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/myicons.css">
+</head>
+
+<body  class = "about-body">
+    <div class="limiter">
+        <div class="container-login">
+            <div class="wrap-login"> 
+                <div class="form-modal">
+
+                    <div class="form-tabs">
+                        <button id="login-toggle" onclick="toggleLogin()"> Log In </button>
+                        <button id="signup-toggle" onclick="toggleSignup()"> Sign Up </button>
+                    </div>
+
+
+
+
+                    <div id="signin-form">
+                        <form>
+                            <span class="login-form-title gray20">
+                                Member Login
+                                </span>
+
+                            <div class="wrap-input" data-validate="valid email is required: ex@abc.xyz">
+                                <input class="input100 gray40" type="text" name="email" placeholder="abc@example.xyz" autocomplete="off">
+                                <span class="focus-input100"></span>
+
+                                <span class="symbol-input100 icon-envelope">
+                                    </span>
+                            </div>
+
+                            <div class="wrap-input" data-validate="Password is required">
+                                <input class="input100 gray40" type="password" name="password" placeholder="Password" autocomplete="off">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100 icon-unlock-alt">                                     
+                                    </span>
+                            </div>
+
+                            <div class="container-login-form-btn">
+                                <button type="submit" class="login-form-btn">
+                                        Login
+                                    </button>
+                            </div>
+
+                            <div class="footer-lnk">
+                                <span class="txt-footer">
+                                     Forgot
+                                    </span>
+                                <a class="txt-footer-lnk" href=""> Username / Password? </a>
+
+                            </div>
+                            <div class="footer-lnk">
+                                <span class="txt-footer">
+                                     Click here to 
+                                    </span>
+                                <a class="txt-footer-lnk" href="" onclick="toggleSignup()"> Create an account </a>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div id="signup-form">
+                        <form>
+                            <span class="login-form-title gray20">
+                                Sign up for Free
+                            </span>
+
+                            <div class="wrap-input">
+                                <input class="input100 gray40" type="text" name="first-name" placeholder="First Name" autocomplete="off" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100 icon-user"></span>
+                            </div>
+
+                            <div class="wrap-input">
+                                <input class="input100 gray40" type="text" name="last-name" placeholder="Last Name" autocomplete="off" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100 icon-user"></span>
+                            </div>
+
+                            <div class="wrap-input">
+                                <input class="input100" type="email" name="email" placeholder="abc@example.xyz" autocomplete="off" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100 icon-envelope"></span>
+                            </div>
+
+                            <div class="wrap-input">
+                                <input class="input100" type="password" name="user-password" placeholder="Password" autocomplete="off" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100 icon-unlock-alt"></span>
+                            </div>
+
+                            <div class="container-login-form-btn">
+                                <button class="login-form-btn">
+                                        Sign up
+                                    </button>
+                            </div>
+
+                            <div class="footer-lnk">
+                                <span class="txt-footer">
+                                     Already a Member?
+                                </span>
+                                <a class="txt-footer-lnk" href="#" onclick="toggleLogin()"> Click here to sign in! </a>
+                            </div>
+
+                        </form>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    const toggleSignup = () => {
+       document.getElementById("login-toggle").style.backgroundColor="#fff";
+        document.getElementById("login-toggle").style.color="#222";
+        document.getElementById("signup-toggle").style.backgroundColor="#57b846";
+        document.getElementById("signup-toggle").style.color="#fff";
+        document.getElementById("signin-form").style.display="none";
+        document.getElementById("signup-form").style.display="block";
+    }
+    
+    const toggleLogin = () => {
+        document.getElementById("login-toggle").style.backgroundColor="#57B846";
+        document.getElementById("login-toggle").style.color="#fff";
+        document.getElementById("signup-toggle").style.backgroundColor="#fff";
+        document.getElementById("signup-toggle").style.color="#222";
+        document.getElementById("signup-form").style.display="none";
+        document.getElementById("signin-form").style.display="block";
+    }
+</script>
+
+<?php
+include 'inc/footer.php';
+?>
