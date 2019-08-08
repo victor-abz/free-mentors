@@ -124,26 +124,34 @@
         </div>
     </div>
 </body>
-<script>
-    const toggleSignup = () => {
-       document.getElementById("login-toggle").style.backgroundColor="#fff";
-        document.getElementById("login-toggle").style.color="#222";
-        document.getElementById("signup-toggle").style.backgroundColor="#57b846";
-        document.getElementById("signup-toggle").style.color="#fff";
-        document.getElementById("signin-form").style.display="none";
-        document.getElementById("signup-form").style.display="block";
-    }
+    <footer>
+        <div style="margin-top: -20px;" class="copyrights">
+            <p>&copy; Free Mentors . All Rights Reserved | Design by  <a href="#" target="_blank">Abizeyimana Victor</a> </p>
+       </div>
+    </footer>
     
-    const toggleLogin = () => {
-        document.getElementById("login-toggle").style.backgroundColor="#57B846";
-        document.getElementById("login-toggle").style.color="#fff";
-        document.getElementById("signup-toggle").style.backgroundColor="#fff";
-        document.getElementById("signup-toggle").style.color="#222";
-        document.getElementById("signup-form").style.display="none";
-        document.getElementById("signin-form").style.display="block";
-    }
-</script>
 
-<?php
-include 'inc/footer.php';
-?>
+</body>
+<script>
+// Login functions
+const toggleSignup = () => {
+  document.getElementById("login-toggle").style.backgroundColor="#fff";
+  document.getElementById("login-toggle").style.color="#222";
+  document.getElementById("signup-toggle").style.backgroundColor="#57b846";
+  document.getElementById("signup-toggle").style.color="#fff";
+  document.getElementById("signin-form").style.display="none";
+  document.getElementById("signup-form").style.display="block";
+}
+    
+const toggleLogin = () => {
+  document.getElementById("login-toggle").style.backgroundColor="#57B846";
+  document.getElementById("login-toggle").style.color="#fff";
+  document.getElementById("signup-toggle").style.backgroundColor="#fff";
+  document.getElementById("signup-toggle").style.color="#222";
+  document.getElementById("signup-form").style.display="none";
+  document.getElementById("signin-form").style.display="block";
+}
+
+</script>
+</html>
+
