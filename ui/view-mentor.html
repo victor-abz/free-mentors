@@ -78,14 +78,66 @@
 					<div class="usr-expertise"> <a href="#">Node .Js</a> 
 					</div>
 					<p></p>
-					<button class="button-style2">Book me now!</button>
+					<button id="requestButton" class="button-style2">Ask me now!</button>
 					</p>
 				</div>
+
+<!--- REQUEST SESSION-->
+<div id="requestSession" class="request-form">
+  <div class="request-form-content">
+    
+
+             <div class="form-modal">
+
+                    <div class="form-title">
+							
+						<div>
+								<span class="close">&times;</span>
+								 Request Mentorship Session 
+						</div>
+                    </div>
+                    <div id="request-form">
+                        <form>
+                            <div class="wrap-input" data-validate="valid email is required: ex@abc.xyz" >
+                                <input class="input100 gray40" type="text" name="email" placeholder="abc@example.xyz" autocomplete="off" required>
+                                <span class="focus-input100"></span>
+
+                                <span class="symbol-input100 icon-envelope">
+                                    </span>
+                            </div>
+
+                            <div class="wrap-input" data-validate="Questions are required">
+                                <textarea class="input110 gray40" type="textarea" name="password" placeholder="Questions" autocomplete="off" required></textarea>
+                                <span class="focus-input110"></span>
+                                <span class="symbol-input110 icon-envelope">                                     
+                                    </span>
+							</div>
+							
+							
+
+                            <div class="container-login-form-btn">
+                                <button type="submit" class="login-form-btn">
+									Request Session
+                                    </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+  </div>
+
+</div>
+
+<!---END OF POP Up FORM-->
+
+
+
+				
 			</div>
 			<!--------------  EVENT TAB --------------->
 			<div class="card-style3 card-scrollable">
 				<div class="header-events">
-					<h1>Latest Events with this trainer</h1>
+					<h1>Latest Session with this Mentor</h1>
 					<hr>
 				</div>
 				<section class="all-events">
@@ -93,11 +145,11 @@
 						<table class="table mtrs-table">
 							<thead>
 								<tr>
-									<th scope="table-col">Topic</th>
-									<th scope="table-col">Date</th>
-									<th scope="table-col">Method</th>
-									<th scope="table-col">Days</th>
-									<th scope="table-col">Action</th>
+									<th scope="col">Topic</th>
+									<th scope="col">Date</th>
+									<th scope="col">Method</th>
+									<th scope="col">Days</th>
+									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,7 +172,7 @@
 						</div>
 					</td>
 					<td>
-						<button class="btn btn-tables btn-small">Manage</button>
+						<button class="btn btn-tables btn-small">Edit</button>
 					</td>
 					</tr>
 					<tr>
@@ -137,7 +189,7 @@
 							</div>
 						</td>
 						<td>
-							<button class="btn  btn-tables btn-small">View</button>
+							<button class="btn  btn-tables btn-small">Edit</button>
 						</td>
 					</tr>
 					<tr>
@@ -154,7 +206,7 @@
 							</div>
 						</td>
 						<td>
-							<button class="btn  btn-tables btn-small">Manage</button>
+							<button class="btn  btn-tables btn-small">Edit</button>
 						</td>
 					</tr>
 					<tr>
@@ -176,7 +228,7 @@
 				</div>
 			</td>
 			<td>
-				<button class="btn  btn-tables btn-small">Manage</button>
+				<button class="btn  btn-tables btn-small " id="myModal" >Edit</button>
 			</td>
 			</tr>
 			</tbody>
@@ -196,5 +248,4 @@
 	</footer>
 </body>
 <script src="js/javascript.js"></script>
-
 </html>
