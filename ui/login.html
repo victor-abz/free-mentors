@@ -17,8 +17,8 @@
                 <div class="form-modal">
 
                     <div class="form-tabs">
-                        <button id="login-toggle" onclick="toggleLogin()"> Log In </button>
-                        <button id="signup-toggle" onclick="toggleSignup()"> Sign Up </button>
+                        <button id="login-toggle" onclick="toggleLogIn()"> Log In </button>
+                        <button id="signup-toggle" onclick="toggleSignUp()"> Sign Up </button>
                     </div>
 
 
@@ -62,7 +62,7 @@
                                 <span class="txt-footer">
                                      Click here to 
                                     </span>
-                                <a class="txt-footer-lnk" href="" onclick="toggleSignup()"> Create an account </a>
+                                <a class="txt-footer-lnk" href="" onclick="toggleSignUp()"> Create an account </a>
 
                             </div>
 
@@ -109,7 +109,7 @@
                                 <span class="txt-footer">
                                      Already a Member?
                                 </span>
-                                <a class="txt-footer-lnk" href="#" onclick="toggleLogin()"> Click here to sign in! </a>
+                                <a class="txt-footer-lnk" href="#" onclick="toggleLogIn()"> Click here to sign in! </a>
                             </div>
 
                         </form>
@@ -123,6 +123,7 @@
 
         </div>
     </div>
+    <script src="js/javascript.js"></script>
 </body>
     <footer>
         <div style="margin-top: -20px;" class="copyrights">
@@ -132,26 +133,5 @@
     
 
 </body>
-<script>
-// Login functions
-const toggleSignup = () => {
-  document.getElementById("login-toggle").style.backgroundColor="#fff";
-  document.getElementById("login-toggle").style.color="#222";
-  document.getElementById("signup-toggle").style.backgroundColor="#57b846";
-  document.getElementById("signup-toggle").style.color="#fff";
-  document.getElementById("signin-form").style.display="none";
-  document.getElementById("signup-form").style.display="block";
-}
     
-const toggleLogin = () => {
-  document.getElementById("login-toggle").style.backgroundColor="#57B846";
-  document.getElementById("login-toggle").style.color="#fff";
-  document.getElementById("signup-toggle").style.backgroundColor="#fff";
-  document.getElementById("signup-toggle").style.color="#222";
-  document.getElementById("signup-form").style.display="none";
-  document.getElementById("signin-form").style.display="block";
-}
-
-</script>
 </html>
-
