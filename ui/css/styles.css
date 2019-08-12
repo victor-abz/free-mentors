@@ -816,7 +816,7 @@ _______________________________ */
 
 
 
-/*------------ GGGG ------ -----*/
+/*------------ Tables ------ -----*/
 .table {
   width: 100%;
   margin-bottom: 1rem;
@@ -828,10 +828,11 @@ _______________________________ */
 }
 
 .table td,
-.table th {
-  padding: .75rem;
+.table th { 
+  padding: .75rem; 
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+  
 }
 
 .table thead th {
@@ -856,7 +857,7 @@ _______________________________ */
   width: 100%;
   min-height: 1px;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 15px; 
 }
 
 .badge {
@@ -919,8 +920,12 @@ _______________________________ */
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
+  text-transform: capitalize;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+
+
 
 .btn-tables {
   color: #fff;
@@ -933,6 +938,31 @@ _______________________________ */
   background-color: #5a6268;
   border-color: #545b62;
 }
+
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c
+}
+.btn-success:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925
+}
+
+
+
 
 .btn-small {
   padding: .25rem .5rem;
@@ -1084,4 +1114,11 @@ _______________________________ */
 .input110:focus + .focus-input110 + .symbol-input110 {
   color: #57b846;
   padding-left: 28px;
+}
+
+/* ------------------- MENTOR SESSIONS ----------------------*/ 
+.card-style4 {
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+  width: 1630px;
+  height: 550px;
 }
