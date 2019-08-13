@@ -887,7 +887,8 @@ _______________________________ */
 	white-space: nowrap;
 	vertical-align: baseline;
 	border-radius: .25rem;
-	min-width: 60px;
+  min-width: 60px;
+  min-height: 10px;
 }
 
 .badge-rounded {
@@ -905,7 +906,10 @@ _______________________________ */
 	color: #fff;
 	background-color: #28a745;
 }
-
+.badge-danger {
+	color: #fff;
+	background-color: #b41111;
+}
 .sub-block {
 	display: block!important;
 }
