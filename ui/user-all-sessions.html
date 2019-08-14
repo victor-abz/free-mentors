@@ -41,7 +41,7 @@
     <!-- END OF HEADER and SIDEBAR SECTION-->
     <section class="content-area">
         <div class="content-heading">
-            <h1> All Mentors</h1>
+            <h1>All my session</h1>
             <p>View all your mentorship session</p>
             <hr> </div>
         <!--------------  EVENT TAB --------------->
@@ -74,7 +74,7 @@
                                 <td><span>24 July 2019</span> </td>
                                 <td><span class="badge badge-rounded badge-success">Finished</span> </td>
                                 <td>
-                                    <button class="btn  btn-success btn-small">Rate</button>
+                                    <button id="requestButton" class="btn  btn-success btn-small">Rate</button>
                                     <button class="btn btn-tables btn-small">view</button>
                                 </td>
                             </tr>
@@ -82,7 +82,7 @@
                                 <td> <b>2038</b> </td>
                                 <td>
                                     <div class="mtrs-table-cell">
-                                        <div class="mtrs-table-cell__text">example@example.tld</div>
+                                        <div class="mtrs-table-cell__text">abc@wxyqs.xyz</div>
                                     </div>
                                 </td>
                                 <td><span>How to creat API with Node Js</span> </td>
@@ -97,7 +97,7 @@
                                 <td> <b>2178</b> </td>
                                 <td>
                                     <div class="mtrs-table-cell">
-                                        <div class="mtrs-table-cell__text">example@example.tld</div>
+                                        <div class="mtrs-table-cell__text">john.doe@example.tld</div>
                                     </div>
                                 </td>
                                 <td><span>How to creat API with Node Js</span> </td>
@@ -116,6 +116,60 @@
             </section>
         </div>
     </section>
+
+    <!--- REQUEST SESSION-->
+<div id="requestSession" class="request-form">
+        <div class="request-form-content">
+          
+      
+                   <div class="form-modal">
+      
+                          <div class="form-title">
+                                  
+                              <div>
+                                      <span class="close">&times;</span>
+                                       Rate this session 
+                              </div>
+                          </div>
+                          <div id="request-form">
+                              <form>
+                                  
+                                  <div class="wrap-input" data-validate="Comments are required">
+                                      <textarea class="input110 gray40" type="textarea" name="password" placeholder="Comments" autocomplete="off" required></textarea>
+                                      <span class="focus-input110"></span>
+                                      <span class="symbol-input110 icon-envelope">                                     
+                                          </span>
+                                  </div>
+                                  <p>How is it likely that you can recommend this mentor?</p>
+                                  <div class="star-rating">
+                                      
+                                        <input type="radio" id="5-stars" name="rating" value="5" />
+                                        <label for="5-stars" class="star">&bigstar;</label>
+                                        <input type="radio" id="4-stars" name="rating" value="4" />
+                                        <label for="4-stars" class="star">&bigstar;</label>
+                                        <input type="radio" id="3-stars" name="rating" value="3" />
+                                        <label for="3-stars" class="star">&bigstar;</label>
+                                        <input type="radio" id="2-stars" name="rating" value="2" />
+                                        <label for="2-stars" class="star">&bigstar;</label> 
+                                        <input type="radio" id="1-star" name="rating" value="1" />
+                                        <label for="1-star" class="star">&bigstar;</label>
+                                    </div>
+                                  
+      
+                                  <div class="container-login-form-btn">
+                                      <button type="submit" class="login-form-btn">
+                                          Rate now
+                                          </button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+      
+        </div>
+      
+      </div>
+      
+      <!---END OF POP Up FORM-->
     <!-- START OF FOOTER SECTION-->
     <footer>
         <div style="margin-top: -20px;" class="copyrights">

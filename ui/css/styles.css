@@ -1273,3 +1273,33 @@ input[type=checkbox] {
 .select-box option {
 	font-weight: normal;
 }
+
+
+.star-rating {
+	border: 0;
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 2em;
+	justify-content: auto;
+	text-align: center;
+	width: 5em;
+	margin-top: 10px;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	color: rgb(128, 128, 128);
+	cursor: pointer;
+}
+
+.star-rating :checked ~ label {
+	color:#57b846;
+}
+
+.star-rating :hover ~ label {
+	color: #81ec6f;
+}
+
