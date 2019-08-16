@@ -457,7 +457,7 @@ _______________________________ */
 	font-size: 40px;
 }
 
-.icon-users, .icon-gauge, .icon-calendar {
+.icon-users, .icon-gauge, .icon-calendar, .icon-smile-o, .icon-star, .icon-calendar-check-o {
 	font-size: 30px;
 	margin-right: 1rem;
 	position: relative;
@@ -600,7 +600,7 @@ _______________________________ */
 	text-align: center;
 	padding: 8px 0em;
 	text-align: center;
-	z-index: 9999;
+	z-index: 0;
 	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -627,7 +627,7 @@ _______________________________ */
 }
 
 .content-heading {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 } 
 /*-------------- Mentors Area ----------------------*/
 .cards {
@@ -639,7 +639,7 @@ _______________________________ */
 }
 
 .card {
-	box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
 	width: 300px;
 	transition: 0.3s;
 	margin: auto;
@@ -649,9 +649,13 @@ _______________________________ */
 	background: #fff;
 	padding-top: 5px;
 }
+.card > a {
+	text-decoration: none;
+}
 
 .card:hover {
-	box-shadow: 8px 8px 12px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 5px 1px 20px 1px #ddd;
+	transform: scale(0.98);
 	transition: 0.3s;
 }
 
@@ -761,7 +765,7 @@ _______________________________ */
 	justify-content: center;
 	align-items: center;
 	padding: 15px;
-	box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
 	margin: auto;
 	width: 800px;
 	height: 550px;
@@ -940,10 +944,25 @@ _______________________________ */
 	padding: .375rem .75rem;
 	font-size: 1rem;
 	line-height: 1.5;
-	border-radius: .25rem;
+	border-radius: 25px;
 	text-transform: capitalize;
 	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+.btn-home {
+	font-size: 20px;
+	margin-left: 30px;
+	color: #fff;
+	text-transform: uppercase;
+	width: 300px;
+	height: 50px;
+	background: #57b846;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	transition: all 0.4s;
+	margin-top: 30px;
+ }
 
 .btn-tables {
 	color: #fff;
@@ -1164,7 +1183,7 @@ _______________________________ */
 .editForm {
 	padding: 0 20px 0 30px;
 	text-align: center;
-	width: 50%;
+	width: 40%;
 }
 
 .check-container {
@@ -1303,3 +1322,32 @@ input[type=checkbox] {
 	color: #81ec6f;
 }
 
+/* Dashboard */
+
+.caption {
+	text-align: left;
+	padding-top: 100px;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 1.3;
+	font-size: 30px;
+	color: black;
+	padding-left: 30px;
+  }
+  .home-para {
+	padding:30px;
+	font-size: 20px;;
+	text-align: left;
+  }
+  .appName {
+	  color: #449d44;
+	  font-weight: bolder;
+  }
+
+  .cards-container{
+
+	width: 1630px;
+	height: 647px;
+	overflow-y: scroll;
+	top:0;
+  }
