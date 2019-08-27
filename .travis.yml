@@ -1,6 +1,6 @@
 language: node js
 
-noe_js:
+node_js:
   - node
 
   install:
