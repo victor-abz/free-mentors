@@ -1,13 +1,10 @@
+--- 
+install: 
+  - "npm ci"
 language: node_js
-
-node_js:
+node_js: 
   - node
-
-  install:
-  - npm ci
-
-script:
-  - npm test
-
 notification: 
   email: false
+script: 
+  - "npm test"
