@@ -21,7 +21,7 @@ they connect to each based on skills and the mentor can provide mentoring sessio
 ## Development setup
 
 This App is still under Development. You need to have Node Js installed on your system and to install all the dependencies for it to run on your system:
-paste the following to your package.json
+the following in the package.json are the dependencies we need
 
 ```sh
  "devDependencies": {
@@ -43,7 +43,7 @@ paste the following to your package.json
     "morgan": "^1.9.1"
   }
   ```
-and then run the following command
+and then run the following command after cloning the repo
 
 ```sh
 npm install
