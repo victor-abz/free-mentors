@@ -20,12 +20,34 @@ they connect to each based on skills and the mentor can provide mentoring sessio
 
 ## Development setup
 
-This App is stillunder Development. You need to have Node Js installed on your system. 
+This App is still under Development. You need to have Node Js installed on your system and to install all the dependencies for it to run on your system:
+paste the following to your package.json
+
+```sh
+ "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.6",
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  }
+  ```
+and then run the following command
 
 ```sh
 npm install
 ```
-
 ## Change log
 * 1.1
     * Added Travis CI for testing and simple test
