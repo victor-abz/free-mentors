@@ -1,14 +1,5 @@
 # free-mentors
 
-Added Travis CI for testing and simple test
-
-
-
-
-
-[![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ch-integrating-travis-ci-168130864)](https://travis-ci.org/victor-abz/free-mentors)
-
-
 Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.
 
 
@@ -36,9 +27,12 @@ npm install
 ```
 
 ## Release History
-
+* 1.1
+    *Added Travis CI for testing and simple test
+    [![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ch-integrating-travis-ci-168130864)](https://travis-ci.org/victor-abz/free-mentors)
 * 1.0
     * Work In progress, Installed all dependencies, and User INterface Available
+    
 
 
 ## Meta
