@@ -26,10 +26,11 @@ This App is stillunder Development. You need to have Node Js installed on your s
 npm install
 ```
 
-## Release History
+## Change log
 * 1.1
-    *Added Travis CI for testing and simple test
+    * Added Travis CI for testing and simple test
     [![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ch-integrating-travis-ci-168130864)](https://travis-ci.org/victor-abz/free-mentors)
+
 * 1.0
     * Work In progress, Installed all dependencies, and User INterface Available
     
