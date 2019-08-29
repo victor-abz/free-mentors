@@ -1,7 +1,9 @@
-# free-mentors [![Coverage Status](https://coveralls.io/repos/github/victor-abz/free-mentors/badge.svg?branch=master)](https://coveralls.io/github/victor-abz/free-mentors?branch=master)  [![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ch-integrating-travis-ci-168130864)](https://travis-ci.org/victor-abz/free-mentors)
-
-
+# free-mentors
 Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.
+
+[Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/)
+
+ons.
 
 
 ## Installation
@@ -62,5 +64,3 @@ npm install
 
 ABIZEYIMANA Victor – [@vicky-abz](https://twitter.com/vicky_abz)
 
-
-[https://github.com/victor-abz/](https://github.com/victor_abz/)
