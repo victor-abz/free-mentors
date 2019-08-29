@@ -435,8 +435,7 @@ _______________________________ */
 
 .sidebar-menu {
 	Background: #f4f4f4;
-	;
-  width: 250px;
+    width: 20%;
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -458,7 +457,7 @@ _______________________________ */
 }
 
 .icon-users, .icon-gauge, .icon-calendar, .icon-smile-o, .icon-star, .icon-calendar-check-o {
-	font-size: 30px;
+	font-size: 220%;
 	margin-right: 1rem;
 	position: relative;
 	top: 8px;
@@ -507,14 +506,14 @@ _______________________________ */
 	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
 	height: 70px;
 	width: 100%;
-	z-index: 999999;
+	z-index: 1;
 }
  /* The sticky class is added to the header with JS when it reaches its scroll position */
 .sticky-header {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	z-index: 999999;
+	z-index: 1;
 }
 
 .logo1 {
@@ -808,8 +807,7 @@ _______________________________ */
 .card-scrollable {
 	margin: 4px, 4px;
 	padding: 4px;
-	overflow-x: hidden;
-	overflow-x: auto;
+	overflow-x: scroll;
 	text-align: justify;
 }
 
@@ -1154,9 +1152,10 @@ _______________________________ */
 /* ------------------- MENTOR SESSIONS ----------------------*/ 
 .card-style4 {
 	box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
-	width: 1630px;
-	height: 550px;
+	width: 100%;
+	height: auto;
 	background: #FFF;
+	overflow-x: scroll;
 }
 
 .wrap-text {
@@ -1346,8 +1345,119 @@ input[type=checkbox] {
 
   .cards-container{
 
-	width: 1630px;
+	width: 100%;
 	height: 647px;
 	overflow-y: scroll;
 	top:0;
   }
+
+/* ---------------- Adding Responsive ness ----------- */
+
+@media (max-width:480px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+	.limiter {
+		overflow-x: scroll; 
+	}
+	.sidebar-menu {
+		visibility: hidden;
+	}
+	.content-area {
+		margin-left: auto;
+		padding-left: 1%;
+		width: 100%;
+		overflow-x: scroll;
+	}
+	.copyrights {
+		padding: auto;
+		width: 480px;
+	}
+/*-------------- HEADER ----------------------*/
+.header-area {
+	padding-left: 120px;
+	background: #f4f4f4;
+	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
+	height: 80px;
+	width: 100%;
+	z-index: 1;
+	align-content: center; 
+}
+
+.logo1 {
+	width: 100%;
+	height: 80px;
+	background: #f4f4f4;
+	display: inline-block;
+
+}
+
+
+
+.wrap-search {
+	visibility: hidden;
+}
+
+.user-area {
+	visibility: hidden;
+}
+
+/*---------- Index -------*/
+
+.card-scrollable {
+	margin: 1%x;
+	padding: 2%;
+	overflow-y: auto;
+	text-align: justify;
+}
+
+.card-style4 {
+	height: 100%;
+	background: #FFF;
+	overflow-x: scroll;
+	margin-top: -40px;
+}
+.content-heading {
+	visibility: hidden;
+}
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-gap: 0.8%;
+	align-items: stretch;
+	height: 300px;
+}
+
+
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+/*-------------- SIDEBAR ----------------------*/
+
+.sidebar-menu {
+	Background: #f4f4f4;
+    width: 20%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
+	margin-top: 70px;
+	z-index: 0;
+}
+
+.icon-users, .icon-gauge, .icon-calendar, .icon-smile-o, .icon-star, .icon-calendar-check-o {
+	font-size: 180%;
+	margin-right: 1rem;
+	position: relative;
+	top: 8px;
+} 
+
+/*-------------- FOOTER ----------------------*/
+.copyrights {
+	padding: auto;
+}
+
+
+
+
+}
