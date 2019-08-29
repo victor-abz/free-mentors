@@ -1,0 +1,10 @@
+--- 
+install: 
+  - "npm ci"
+language: node_js
+node_js: 
+  - node
+notification: 
+  email: false
+script: 
+  - "npm test"
