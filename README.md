@@ -1,9 +1,10 @@
 # free-mentors
 Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.
 
-[Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/)
+[Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/html/login.html)
 
-ons.
+
+
 
 
 ## Installation
