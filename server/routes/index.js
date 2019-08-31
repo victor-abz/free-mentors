@@ -7,8 +7,14 @@ import sessionController from '../controllers/sessionController';
 
 const router = express.Router();
 
+// Mentor Routes
 router.post('/auth/signup', userAuthController.createUser);
 router.post('/auth/login', userAuthController.loginUser);
+
+// Mentor Routes
+router.get('/mentors', mentorController.getMentors);
+router.get('/mentors/:mentorId', mentorController.getMentor);
+
 // routes.get('/users', userController.getUsers);
 // routes.get('/users/:userId', userController.getUser);
 // routes.patch('/user/:userId', userController.changeUserRole);
