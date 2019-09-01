@@ -8,6 +8,12 @@ import sessionController from '../controllers/sessionController';
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    return res.status(200).send({
+        message: 'Welcome to Free Mentors'
+    })
+});
+
 // Mentor Routes
 router.post('/auth/signup', userAuthController.createUser);
 router.post('/auth/login', userAuthController.loginUser);

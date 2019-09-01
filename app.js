@@ -8,7 +8,7 @@ import routes from './server/routes/index';
 import myError from './server/middleware/error';
 import swaggerDocument from './swagger.json';
 
-const hostname = '127.0.0.1';
+
 const port = process.env.PORT || 3000;
 const app = express(); // setup express application
 const server = http.createServer(app);
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 // Importing API URL's
 app.use('/api/v1', routes);
-
+app.use('/', routes);
 // Swagger API
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -29,8 +29,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(myError.handle404);
 app.use(myError.otherErrors);
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+  console.log(`Server running at ${port} port`);
 });
 
 export default app;
