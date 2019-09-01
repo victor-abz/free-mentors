@@ -4,8 +4,10 @@ install:
 language: node_js
 node_js: 
   - node
-notification: 
+notification:
   email: false
 script: 
-  - "npm test"
-after_success: npm run coverage
+  - "npm run test:coveralls"
+  - "npm run lint"
+after_success: 
+  npm run coverage
