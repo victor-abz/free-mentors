@@ -7,12 +7,9 @@
     "test": "nyc --reporter=text --reporter=html mocha --require @babel/register ./server/test/**.test.js --exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "dev": "nodemon --exec babel-node app.js",
+    "start": "node babel-node app.js",
     "lint": "npx eslint --fix",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/index.js"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -25,6 +22,7 @@
   },
   "homepage": "https://github.com/victor-abz/free-mentors#readme",
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
@@ -43,7 +41,6 @@
     "prettier-eslint": "^9.0.0"
   },
   "dependencies": {
-    "@babel/cli": "^7.5.5",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
