@@ -1,4 +1,4 @@
-# free-mentors
+# free-mentors [![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ft-integrating-coveralls-%23168236739)](https://travis-ci.org/victor-abz/free-mentors) [![Coverage Status](https://coveralls.io/repos/github/victor-abz/free-mentors/badge.svg?branch=ft-integrating-coveralls-%23168236739)](https://coveralls.io/github/victor-abz/free-mentors?branch=ft-integrating-coveralls-%23168236739)
 Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.
 
 [Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/)
