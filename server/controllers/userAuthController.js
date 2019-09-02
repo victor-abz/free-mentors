@@ -68,6 +68,43 @@ const userAuthController = {
       },
     });
   },
+  // Updating Data
+  changeToMentor: (req, res) => {
+    const user = userModel.findUser(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    userModel.changeToMentor(req.params.userId);
+    return res.status(200).json({
+      status: 200,
+      data: {
+        message: 'User account changed to mentor',
+      },
+    });
+  },
+
+  // Getting All Users
+  getUsers: (req, res) => {
+    const users = userModel.findUsers();
+    return res.status(200).json({
+      message: 'Found all users',
+      data: users,
+    });
+  },
+
+  // Getting one User
+  getUser: (req, res) => {
+    const user = userModel.findUser(req.params.userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'user not found',
+      });
+    }
+    return res.status(200).json({
+      message: 'Found...',
+      user,
+    });
+  },
 };
 
 export default userAuthController;
