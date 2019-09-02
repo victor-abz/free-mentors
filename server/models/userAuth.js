@@ -72,7 +72,8 @@ class User {
     this.users.push(newUser);
     return newUser;
   }
-// Login user
+
+  // Login user
   loginUser(data) {
     if (!data.email || !data.password) {
       return 'Some values are missing';
@@ -88,6 +89,24 @@ class User {
       return 'The credentials you provided is incorrect';
     }
     return userExist;
+  }
+
+  //
+  findUser(userId) {
+    return this.users.find((oneUser) => oneUser.userId === parseInt(userId, 10));
+  }
+
+  //
+  findUsers() {
+    return this.users;
+  }
+
+  // Change to mentor
+  changeToMentor(userId) {
+    const user = this.findUser(userId);
+    const index = this.users.indexOf(user);
+    this.users[index].role = 'Mentor';
+    return this.users[index];
   }
 }
 export default new User();
