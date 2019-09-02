@@ -6,7 +6,7 @@ class Session {
         sessionId: 1,
         mentorId: 2,
         menteeId: 3,
-        questions: 'How to run npm',
+        questions: 'Question to mentor',
         menteeEmail: 'john@freementee.com',
         status: 'pending',
       },
@@ -14,6 +14,22 @@ class Session {
         sessionId: 2,
         mentorId: 2,
         menteeId: 3,
+        questions: 'Another for Mentor',
+        menteeEmail: 'john@freementee.com',
+        status: 'pending',
+      },
+      {
+        sessionId: 2,
+        mentorId: 3,
+        menteeId: 4,
+        questions: 'How to run npm',
+        menteeEmail: 'john@freementee.com',
+        status: 'pending',
+      },
+      {
+        sessionId: 2,
+        mentorId: 5,
+        menteeId: 4,
         questions: 'How to run npm',
         menteeEmail: 'john@freementee.com',
         status: 'pending',
@@ -38,6 +54,15 @@ class Session {
   // Function to find one mentor
   findSession(sessionId) {
     return this.sessions.find((oneSession) => oneSession.sessionId === parseInt(sessionId, 10));
+  }
+
+  //
+  findUserRequests(userId) {
+    return this.sessions.filter((userRequests) => userRequests.menteeId === parseInt(userId, 10));
+  }
+
+  findMentorRequests(mentorId) {
+    return this.sessions.filter((userRequests) => userRequests.mentorId === parseInt(mentorId, 10));
   }
 
   acceptSession(sessionId) {
