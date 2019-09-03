@@ -21,13 +21,12 @@ app.use(bodyParser.json());
 
 // Importing API URL's
 app.use('/api/v1', routes);
-app.use('/', routes);
 // Swagger API
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Importing API URL's
 app.use(myError.handle404);
-app.use(myError.otherErrors);
+// app.use(myError.otherErrors);
 
 server.listen(port, () => {
   console.log(`Server running at ${port} port`);
