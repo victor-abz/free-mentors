@@ -356,7 +356,6 @@ _______________________________ */
 	position: relative;
 	width: 100%;
 	height: auto;
-	background-color: #c850c0;
 }
 
 .form-tabs button {
@@ -1355,8 +1354,59 @@ input[type=checkbox] {
 
 
 /* /-----ADVANCED CSS Responsive Start Here */
+@media (min-width: 1700px) {
+	.content-area {
+		margin-left: 23%;
+		padding-left: 1%;
+		width: 78%;
+		overflow-x: scroll;
+		margin-top: 15px;
+		font-size: 140%;
+	}
 
+	.menu li a {
+		font-size: 0.70em;
+		display: block;
+		width: 100%;
+		text-decoration: none;
+		padding: 20px 20px;
+		font-weight: bold;
+	}
+	.sidebar-menu {
+		Background: #f4f4f4;
+		width: 22%;
+		font-size: 140%;
+		margin-top: 70px;
+		z-index: 2;
+		overflow-x: scroll;
+	}
+}
+@media (min-width: 1300px) and (max-width: 1699px) {
+	.content-area {
+		margin-left: 23%;
+		padding-left: 1%;
+		width: 78%;
+		overflow-x: scroll;
+		margin-top: 15px;
+	}
 
+	.menu li a {
+		font-size: 0.73em;
+		display: block;
+		width: 100%;
+		text-decoration: none;
+		padding: 20px 20px;
+		font-weight: bold;
+	}
+	.sidebar-menu {
+		Background: #f4f4f4;
+		width: 22%;
+		font-size: 100%;
+		margin-top: 70px;
+		z-index: 2;
+		overflow-x: scroll;
+	}
+}
 /* 
 	##Device = Laptops, Desktops
 	##Screen = B/w 1025px to 1280px
@@ -1370,7 +1420,7 @@ input[type=checkbox] {
 		overflow-x: scroll;
 	}
 	.menu li a {
-		font-size: 0.73em;
+		font-size: 0.63em;
 		display: block;
 		width: 100%;
 		text-decoration: none;
@@ -1488,6 +1538,76 @@ input[type=checkbox] {
 		max-height: 78%;
 		font-size: 78%;
 	}
+	
+	/*-------------- SIGN IN ----------------------*/
+
+	.limiter {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	.wrap-login {
+		width: 80%;
+		background: #fff;
+		border-radius: 20px;
+	}
+
+	.form-modal {
+		width: 100%;
+	}
+
+	.login-form-title {
+		font-size: 18px;
+		line-height: 1;
+		text-align: center;
+		width: 100%;
+		display: block;
+		padding-bottom: 20px;
+	}
+
+	.wrap-input {
+		position: relative;
+		width: 100%;
+		z-index: 1;
+		margin-bottom: 6px;
+	}
+
+	.input100 {
+		font-size: 15px;
+		line-height: 1.5;
+		width: 100%;
+		background: #e6e6e6;
+		height: 30px;
+		padding: 0 20px 0 68px;
+	}
+
+	.login-form-btn {
+		font-size: 12px;
+		color: #fff;
+		text-transform: uppercase;
+		width: 100%;
+		height: 30px;
+		border-radius: 25px;
+		padding: 0 20px;
+	}
+	.txt-footer {
+		font-size: 10px;
+	}
+	
+	.txt-footer-lnk {
+		font-size: 10px;
+	}
+	
+	.footer-lnk {
+		text-align: center;
+		padding-top: 6px;
+	}
+	.form-tabs button {
+		margin-bottom: 1.4em;
+		padding: 1em;
+		font-size: 0.8em;
+	}
+	
 }
 
 
@@ -1503,6 +1623,7 @@ input[type=checkbox] {
 		max-height: 70%;
 		font-size: 70%;
 	}
+	
 }
 
 
@@ -1668,6 +1789,67 @@ input[type=checkbox] {
 		width: 90px;
 		height: auto;
 	}
+
+	/*-------------- SIGN IN ----------------------*/
+
+	.wrap-login {
+		width: 60%;
+		background: #fff;
+		border-radius: 20px;
+	}
+
+	.login-form-title {
+		font-size: 14px;
+		line-height: 1;
+		text-align: center;
+		width: 100%;
+		display: block;
+		padding-bottom: 10px;
+	}
+
+	.wrap-input {
+		position: relative;
+		width: 100%;
+		z-index: 1;
+		margin-bottom: 3px;
+	}
+
+	.input100 {
+		font-size: 15px;
+		line-height: 1.5;
+		width: 100%;
+		background: #e6e6e6;
+		height: 20px;
+		padding: 0 20px 0 68px;
+	}
+
+	.login-form-btn {
+		font-size: 12px;
+		color: #fff;
+		text-transform: uppercase;
+		width: 100%;
+		height: 20px;
+		border-radius: 25px;
+		padding: 0 10px;
+	}
+	.txt-footer {
+		font-size: 10px;
+	}
+	
+	.txt-footer-lnk {
+		font-size: 10px;
+	}
+	
+	.footer-lnk {
+		text-align: center;
+		padding-top: 1px;
+		display: block;
+	}
+	.form-tabs button {
+		margin-bottom: 1.1em;
+		padding: 1em;
+		font-size: 0.8em;
+	}
 }
 
 
@@ -1775,29 +1957,70 @@ input[type=checkbox] {
 		width: 100%;
 		z-index: 1;
 	}
-}
 
+		/*-------------- SIGN IN ----------------------*/
 
-/* 
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-
-@media (min-width: 1281px) {
-	.content-area {
-		margin-left: 23%;
-		padding-left: 1%;
-		width: 100%;
-		overflow-x: scroll;
-	}
-	.sidebar-menu {
-		Background: #f4f4f4;
-		width: 22%;
-		font-size: 100%;
-		margin-top: 70px;
-		z-index: 2;
-		overflow-x: scroll;
-	}
+		.wrap-login {
+			width: 70%;
+			background: #fff;
+			border-radius: 20px;
+			font-size: 70%;
+		}
+	
+		.login-form-title {
+			font-size: 12px;
+			line-height: 1;
+			text-align: center;
+			width: 100%;
+			display: block;
+			padding-bottom: 10px;
+		}
+	
+		.wrap-input {
+			position: relative;
+			width: 100%;
+			z-index: 1;
+			margin-bottom: 3px;
+		}
+	
+		.input100 {
+			font-size: 10px;
+			line-height: 1.5;
+			width: 100%;
+			background: #e6e6e6;
+			height: 20px;
+			padding: 0 20px 0 68px;
+		}
+	
+		.login-form-btn {
+			font-size: 12px;
+			color: #fff;
+			text-transform: uppercase;
+			width: 60%;
+			height: 20px;
+			border-radius: 25px;
+			padding: 0 10px;
+			position: right;
+		}
+		.txt-footer {
+			font-size: 7px;
+		}
+		
+		.txt-footer-lnk {
+			font-size: 7px;
+		}
+		
+		.footer-lnk {
+			text-align: center;
+			padding-top: 1px;
+			display: block;
+		}
+		.form-tabs button {
+			margin-bottom: 1.1em;
+			padding: 1em;
+			font-size: 0.8em;
+		}
+	
 }
 
 
@@ -1814,30 +2037,33 @@ input[type=checkbox] {
 		visibility: hidden;
 	}
 	.content-area {
-		margin-left: auto;
-		padding-left: 1%;
+		margin: 0;
+		padding-left: 0;
 		width: 100%;
 		overflow-x: scroll;
+		z-index:2;
 	}
+	.content-heading {
+		visibility: hidden
+	} 
 	.copyrights {
 		visibility: hidden;
 	}
 	/*-------------- HEADER ----------------------*/
 	.header-area {
-		padding-left: 120px;
-		background: #f4f4f4;
-		box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
-		height: 80px;
-		width: 100%;
-		z-index: 1;
-		align-content: center;
+		visibility: hidden
 	}
 	.logo1 {
 		width: 100%;
-		height: 80px;
+		height: 10px;
 		background: #f4f4f4;
 		display: inline-block;
 	}
+	.logo1 img {
+		width: 30px;
+		height: auto;
+	}
+	
 	.wrap-search {
 		visibility: hidden;
 	}
@@ -1846,13 +2072,13 @@ input[type=checkbox] {
 	}
 	/*---------- Index -------*/
 	.card-scrollable {
-		margin: 1%;
+
 		padding: 2%;
 		overflow-y: auto;
 		text-align: justify;
 	}
 	.card-style4 {
-		height: 100%;
+		height: 30%;
 		background: #FFF;
 		overflow-x: scroll;
 		margin-top: -40px;
@@ -1866,5 +2092,99 @@ input[type=checkbox] {
 		grid-gap: 0.8%;
 		align-items: stretch;
 		height: 300px;
+		z-index:0;
+		margin-top: 0;
+	}
+	.card {
+		box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+		width: 200px;
+		transition: 0.3s;
+		margin: auto;
+		text-align: center;
+		font-family: arial;
+		border-radius: 5px;
+		background: #fff;
+		padding-top: 5px;
+	}
+	.card-user-img > img {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		margin: 0 auto;
+	}
+	.user-name {
+		font-size: 2px;
+		display: block;
+		text-align: center;
+		margin: 2px 0;
+		text-transform: capitalize;
+	}
+	
+
+	/*-------------- SIGN IN ----------------------*/
+
+	.wrap-login {
+		width: 90%;
+		background: #fff;
+		border-radius: 20px;
+		font-size: 70%;
+	}
+
+	.login-form-title {
+		font-size: 9px;
+		line-height: 1;
+		text-align: center;
+		width: 100%;
+		display: block;
+		padding-bottom: 10px;
+	}
+
+	.wrap-input {
+		position: relative;
+		width: 100%;
+		z-index: 1;
+		margin-bottom: 3px;
+	}
+
+	.input100 {
+		font-size: 10px;
+		line-height: 1.5;
+		width: 100%;
+		background: #e6e6e6;
+		height: 20px;
+		padding: 0 20px 0 68px;
+	}
+
+	.login-form-btn {
+		font-size: 10px;
+		color: #fff;
+		text-transform: uppercase;
+		width: 60%;
+		height: 17px;
+		border-radius: 25px;
+		padding: 0 10px;
+		position: right;
+	}
+	.txt-footer {
+		font-size: 5px;
+	}
+	
+	.txt-footer-lnk {
+		font-size: 5px;
+	}
+	
+	.footer-lnk {
+		text-align: center;
+		padding-top: 1px;
+		display: block;
+	}
+	.form-tabs button {
+		margin-bottom: 1.1em;
+		padding: 1em;
+		font-size: 0.8em;
 	}
 }
+
+@-ms-viewport{
+	width: device-width;
+  }
