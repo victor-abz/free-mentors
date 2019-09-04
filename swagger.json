@@ -1,0 +1,86 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2.0",
+        "title": "free Mentor",
+        " description": "Free mentors",
+        "description": "Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.",
+        "license": {
+           "name" : "ISC",
+            "url": "http://www.google.com"
+       }
+    },
+    "basepath":"/api/v1",
+    "tags" : [
+        {
+            "name": "users",
+            "description":"User Can register and login"
+        },
+        {
+            "name": "mentors",
+            "description":"Mentor User"
+        },
+        {
+            "name": "Sessions",
+            "description":"Mentor User"
+        }
+    ],
+    "schemes" : [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/login" : {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "login a user",
+                "parameters" : [{
+                    "name": "Users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/signup"
+
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "response" : {
+                    "201": {
+                        "description": "User succesfully created"
+                    },
+                    "401": {
+                        "description": "Authentication error"
+                    }
+
+                }
+
+            }
+        }
+
+    },
+    "definitions": {
+        "signup": {
+            "required" : [
+                "email",
+                "password"
+            ],
+            "type":"object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+
+    }
+}
