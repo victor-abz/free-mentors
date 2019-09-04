@@ -11,9 +11,8 @@
 ## User Interface
 The Free mentors Project is made with HTML and Pure Css. 
 
-[Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/)
+[Click here to view the UI](https://victor-abz.github.io/free-mentors/ui/html/login.html)
 
-![](ui/images/screenshots/1.png) ![](ui/images/screenshots/2.png) ![](ui/images/screenshots/3.png)
 
 
 
