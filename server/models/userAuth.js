@@ -47,14 +47,6 @@ class User {
 
   // Sign Up a new User
   createUser(data, res) {
-    // const userExist = this.users.find((oneUser) => oneUser.email === data.email);
-    const allUsers = this.findUsers();
-    const userExist = Helper.findObjectByProp(allUsers, 'email', data.email)
-    if (userExist !== undefined) {
-      const status = 401;
-      const error = 'Email Already Exists';
-      return Helper.handleError(res, status, error);
-    } 
     const hashPassword = Helper.hashPassword(data.password);
     // Create a new User
     const newUser = {
@@ -95,13 +87,6 @@ class User {
     const allUsers = this.findUsers();
     const userExist = Helper.findObjectByProp(allUsers, 'email', data.email)
 
-    if (userExist === undefined) {
-      // return 'The Email do not exist';
-
-      const status = 400;
-      const error = 'The Email do not exist';
-      return Helper.handleError(res, status, error);
-    }
     if (!Helper.comparePassword(userExist.password, data.password)) {
       // return 'The credentials you provided is incorrect';
       const status = 400;
@@ -117,7 +102,8 @@ class User {
     const token = Helper.generateToken(payload);
     const status = 200;
     const message = 'User is successfully logged in';
-    return Helper.handleSuccess(res, status, message, token);
+    const result = {token : token};
+    return Helper.handleSuccess(res, status, message, result);
   }
 
   //
@@ -140,11 +126,6 @@ class User {
     const allUsers = this.findUsers();
     const userExist = Helper.findObjectByProp(allUsers, 'userId', parseInt(data,10))
 
-    if (userExist === undefined) {
-      const status = 404;
-      const error = 'User Not Found';
-      return Helper.handleError(res, status, error);
-    }
     const index = this.users.indexOf(userExist);
     this.users[index].role = 'Mentor';
     const status = 200;

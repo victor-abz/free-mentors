@@ -6,6 +6,20 @@ import Helper from '../helpers/helper';
 import sessionModel from '../models/sessions'
 
 const checkData = {
+
+// Compare Passwords
+  comparePassword(req, res, next) {
+   const  password = req.body.password;
+   const user = userModel.findUser('email',req.body.email);
+   if (!bcrypt.compareSync(password, user.password)){
+    return res.status(400).json({
+      status: 400,
+      error: 'The credentials you provided is incorrect',
+    });
+   }
+   next();
+  },
+
 // Check if Email is Valid
   isValidEmail(req, res, next) {
     if (!(/\S+@\S+\.\S+/.test(req.body.email))) {
@@ -83,25 +97,23 @@ const checkData = {
     next();
   },
  // Check Required Fields before submit
-  checkInput: (req, res, next) => {    
+  checkDetails: (req, res, next) => {    
     if (!req.body.email || !req.body.password) {
-      const status = 400;
-      const error = 'Some Values are missing';
-      return Helper.handleError(res, status, error);
-      // return res.status(400).json({
-      //   status: 400,
-      //   error: 'Some values are missing',
-      // });
+      
+      return res.status(400).json({
+        status: 400,
+        error: 'Some values are missing',
+      });
     } 
     next();
   },
 
-  // isSessionReviewable: (req, res, next) => {
-  //   const allSession = sessionModel.findSessions();
-  //   const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(req.params.sessionId,10))
-  //   if(sessionId === 'undefined')
+//   isSessionReviewable: (req, res, next) => {
+//     const allSession = sessionModel.findSessions();
+//     const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(req.params.sessionId,10))
+//     if(sessionId === 'undefined')
 
-  // }
+//   }
 
 }
 

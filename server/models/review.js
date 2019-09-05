@@ -1,3 +1,4 @@
+import Helper from '../helpers/helper'
 class Review {
   //
   constructor() {
@@ -50,14 +51,22 @@ class Review {
     return newReview;
   }
 
-  // findReview(sessionId) {
-  //   return this.reviews.find((oneSession) => oneSession.sessionId === parseInt(sessionId, 10));
-  // }
+  findReviews() {
+    return this.reviews;
+  }
 
-  deleteReview(reviewId) {
-    const review = this.findReview(reviewId);
+  deleteReview(sessionId, res) {
+    const allReviews = this.findReviews();
+    const review = Helper.findObjectByProp(allReviews, 'sessionId', parseInt(sessionId,10))
+    
     const index = this.reviews.indexOf(review);
     this.reviews.splice(index, 1);
+
+    const status = 200;
+    const message = 'undefined';
+    const result = { message : 'Review successfully deleted'};
+    return Helper.handleSuccess(res, status,message, result);
   }
+
 }
 export default new Review();

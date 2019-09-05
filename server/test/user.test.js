@@ -50,4 +50,23 @@ describe('User Authorization', () => {
         done(error);
       });
   });
+  it('Should get all users', (done) => {
+    router()
+      .get('/api/v1/users')
+      .end((error, response) => {
+        console.log(response.body)
+        expect(response).to.have.status(200);
+        expect(response.body).to.be.a('object');
+        done(error);
+      });
+  });
+  it('Should change user to a mentor', (done) => {
+    router()
+      .patch('/api/v1/users/1')
+      .end((error, response) => {
+        expect(response).to.have.status(200);
+        expect(response.body).to.be.a('object');
+        done(error);
+      });
+  });
 });

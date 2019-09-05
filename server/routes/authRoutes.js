@@ -4,8 +4,8 @@ import userAuthController from '../controllers/userAuthController';
 
 const userAuth = express.Router();
 
-userAuth.post('/auth/signup', checkData.checkDetails, checkData.isValidEmail, userAuthController.createUser);
-userAuth.post('/auth/login',checkData.checkDetails, checkData.isValidEmail,  userAuthController.loginUser);
+userAuth.post('/auth/signup', checkData.checkInput, checkData.isValidEmail, userAuthController.createUser);
+userAuth.post('/auth/login',checkData.checkInput, checkData.isValidEmail,  userAuthController.loginUser);
 
 // Mentor Routes
 // userAuth.post('/auth/signup', checkData.checkDetails, checkData.isValidEmail, checkData.doUserExist, userAuthController.createUser);

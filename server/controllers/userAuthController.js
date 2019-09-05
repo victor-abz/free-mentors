@@ -19,8 +19,8 @@ const userAuthController = {
   // Getting All Users
   getUsers: (req, res) => {
     const users = userModel.findUsers();
-    status = 200;
-    message = 'All Users Fetched'
+    const status = 200;
+    const message = 'All Users Fetched'
     return Helper.handleSuccess(res, status,'undefined', users);
   }
 };
