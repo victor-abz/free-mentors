@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Importing API URL's
-app.use('/api/v1', routes);
+// app.use('/api/v1', routes);
 app.use('/', routes);
 // Swagger API
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

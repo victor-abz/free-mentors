@@ -1,105 +1,66 @@
 import sessionModel from '../models/sessions';
 import reviewModel from '../models/review';
+import Helper from '../helpers/helper';
 
 const sessionController = {
 // Creating Session
-  createSessions: (req, res) => {
-    if (!req.body.questions && !req.body.mentorId) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-    //  console.log(req.userData);
+  createSessions: (req, res) => {  
     const data = sessionModel.createSession(req.body, req.userData);
-    return res.status(201).json({
-      status: 200,
-      data,
-    });
+    const status = 201;
+    const message = 'undefined';
+    return Helper.handleSuccess(res, status, message, data);
   },
   // Getting All data
-  getSessions: (req, res) => {
-    const { userData } = req;
+  getSessions: (req, res) => { // Middleware for Checking Role Needed    
     if (req.userData.role === 'user') {
-      const data = sessionModel.findUserRequests(userData.userId);
-      return res.status(200).json({
-        status: 200,
-        data,
-      });
+      const role = 'menteeId'
+      const allSessions = sessionModel.findSessions();
+      const sessionExist = Helper.filterObjectByProp(allSessions, role , req.userData.userId)
+      console.log(sessionExist)
+
+      const status = 200;
+      const message = 'undefined';
+      return Helper.handleSuccess(res, status, message, sessionExist);
     }
     if (req.userData.role === 'mentor') {
-      const data = sessionModel.findMentorRequests(userData.userId);
-      return res.status(200).json({
-        status: 200,
-        data,
-      });
+      const role = 'mentorId'
+      const allSessions = sessionModel.findSessions();
+      const sessionExist = Helper.filterObjectByProp(allSessions, role , req.userData.userId)
+      console.log(sessionExist)
+
+      const status = 200;
+      const message = 'undefined';
+      return Helper.handleSuccess(res, status, message, sessionExist);
     }
 
-    const data = sessionModel.findSessions();
-    return res.status(200).json({
-      status: 200,
-      data,
-    });
+    if (req.userData.role === 'Admin') {
+      const allSessions = sessionModel.findSessions();
+      const status = 200;
+      const message = 'undefined';
+      return Helper.handleSuccess(res, status, message, allSessions);
+    }
+    const status = 401;
+    const error = 'Insufficient provilege. Please sign in';
+    return Helper.handleError(res, status, error);
+
+    
   },
 
-  // Getting one mentor
-  getSession: (req, res) => {
-    const data = sessionModel.findSession(req.params.sessionId);
-    if (!data) {
-      return res.status(404).json({
-        message: 'No Session found',
-      });
-    }
-    return res.status(200).json({
-      status: 200,
-      data,
-    });
-  },
-  // Updating Data
+
+  // Acceppt Session
   acceptSession: (req, res) => {
-    const session = sessionModel.findSession(req.params.sessionId);
-    if (!session) {
-      return res.status(404).json({ message: 'session not found' });
-    }
-    const data = sessionModel.acceptSession(req.params.sessionId);
-    return res.status(200).json({
-      status: 200,
-      data,
-    });
+    sessionModel.changeStatus('Accepted', req.params.sessionId, res);
   },
-  //
+  // Reject Session
   rejectSession: (req, res) => {
-    const session = sessionModel.findSession(req.params.sessionId);
-    if (!session) {
-      return res.status(404).json({ message: 'session not found' });
-    }
-    const data = sessionModel.rejectSession(req.params.sessionId);
-    return res.status(200).json({
-      message: 'Session Rejected',
-      data,
-    });
+    sessionModel.changeStatus('Rejected', req.params.sessionId, res);
   },
 
   createReview: (req, res) => {
-    const score = parseInt(req.body.score, 10);
-
-    if (!score) {
-      return res.status(400).json({ message: 'Score is required' });
-    }
-    if (score > 0 && score <= 5) {
-      const session = sessionModel.findSession(req.params.sessionId);
-
-      if (!session) {
-        return res.status(404).json({ message: 'session not found' });
-      }
-
-      const data = reviewModel.createReview(req.body, req.userData);
-      return res.status(201).json({
-        status: 201,
-        data,
-      });
-    }
-    return res.status(400).json({
-      status: 400,
-      message: 'A score should be between 0 and 5',
-    });
+      const data = reviewModel.createReview(req.body, req.params.sessionId, req.userData);
+      const status = 201;
+      const message = 'undefined';
+      return Helper.handleSuccess(res, status, message, data);
   },
 
   // Deleting Data

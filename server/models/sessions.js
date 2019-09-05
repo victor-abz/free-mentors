@@ -1,3 +1,4 @@
+import Helper from '../helpers/helper'
 class Session {
   //
   constructor() {
@@ -5,9 +6,9 @@ class Session {
       {
         sessionId: 1,
         mentorId: 2,
-        menteeId: 3,
+        menteeId: 5,
         questions: 'Question to mentor',
-        menteeEmail: 'john@freementee.com',
+        menteeEmail: 'Notnto@freementee.com',
         status: 'pending',
       },
       {
@@ -51,36 +52,25 @@ class Session {
     return newSession;
   }
 
-  // Function to find one mentor
-  findSession(sessionId) {
-    return this.sessions.find((oneSession) => oneSession.sessionId === parseInt(sessionId, 10));
-  }
+ 
+// Change Status to Accpeted or Rejected
+  changeStatus(changeTo,data, res) {
+    
+    const allSession = this.findSessions();
+    const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(data,10))
 
-  //
-  findUserRequests(userId) {
-    return this.sessions.filter((userRequests) => userRequests.menteeId === parseInt(userId, 10));
-  }
+    const index = this.sessions.indexOf(sessionExist);
+    this.sessions[index].status = changeTo;
+    const result = this.sessions[index];
+    
+    const status = 200;
+    const message = `Session is now ${changeTo}`;
 
-  findMentorRequests(mentorId) {
-    return this.sessions.filter((userRequests) => userRequests.mentorId === parseInt(mentorId, 10));
-  }
-
-  acceptSession(sessionId) {
-    const session = this.findSession(sessionId);
-    const index = this.sessions.indexOf(session);
-    this.sessions[index].status = 'Accepted';
-    return this.sessions[index];
-  }
-
-  rejectSession(sessionId) {
-    const session = this.findSession(sessionId);
-    const index = this.sessions.indexOf(session);
-    this.sessions[index].status = 'Rejected';
-    return this.sessions[index];
+    return Helper.handleSuccess(res, status,message, result);
   }
 
 
-  //
+  // Find session
   findSessions() {
     return this.sessions;
   }

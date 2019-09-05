@@ -1,4 +1,5 @@
 import Helper from '../helpers/helper';
+import checkData from '../middleware/checkData';
 
 
 class User {
@@ -45,16 +46,15 @@ class User {
   }
 
   // Sign Up a new User
-  createUser(data) {
-    const userExist = this.users.find((oneUser) => oneUser.email === data.email);
+  createUser(data, res) {
+    // const userExist = this.users.find((oneUser) => oneUser.email === data.email);
+    const allUsers = this.findUsers();
+    const userExist = Helper.findObjectByProp(allUsers, 'email', data.email)
     if (userExist !== undefined) {
-      return 'Email exists';
-    } if (!data.email || !data.password) {
-      return 'Some values are missing';
-    }
-    if (!Helper.isValidEmail(data.email)) {
-      return 'Please enter a valid email address';
-    }
+      const status = 401;
+      const error = 'Email Already Exists';
+      return Helper.handleError(res, status, error);
+    } 
     const hashPassword = Helper.hashPassword(data.password);
     // Create a new User
     const newUser = {
@@ -70,30 +70,63 @@ class User {
       role: 'user',
     };
     this.users.push(newUser);
-    return newUser;
+    const payload = {
+      firstName : newUser.firstName,
+      lastName : newUser.lastName,
+      email : newUser.email,
+      address : newUser.address,
+      bio : newUser.bio ,
+      occupation : newUser.occupation ,
+      expertise : newUser.expertise ,
+    }
+    const token = Helper.generateToken(payload);
+
+    const status = 201;
+    const message = 'User created successfully';
+    const datame = {token: token , message: 'User created successfully'}
+    return Helper.handleSuccess(res, status, message, datame);
+
+    // return token;
   }
 
   // Login user
-  loginUser(data) {
-    if (!data.email || !data.password) {
-      return 'Some values are missing';
-    } if (!Helper.isValidEmail(data.email)) {
-      return 'Please enter a valid email address';
-    }
-    const userExist = this.users.find((oneUser) => oneUser.email === data.email);
+  loginUser(data, res) {
+    // const userExist = this.users.find((oneUser) => oneUser.email === data.email);
+    const allUsers = this.findUsers();
+    const userExist = Helper.findObjectByProp(allUsers, 'email', data.email)
 
     if (userExist === undefined) {
-      return 'The Email you provided is incorrect';
+      // return 'The Email do not exist';
+
+      const status = 400;
+      const error = 'The Email do not exist';
+      return Helper.handleError(res, status, error);
     }
     if (!Helper.comparePassword(userExist.password, data.password)) {
-      return 'The credentials you provided is incorrect';
+      // return 'The credentials you provided is incorrect';
+      const status = 400;
+      const error = 'The credentials you provided is incorrect';
+      return Helper.handleError(res, status, error);
     }
-    return userExist;
+    // return userExist;
+    const payload = {
+      email: userExist.email,
+      userId: userExist.userId,
+      role: userExist.role
+    }
+    const token = Helper.generateToken(payload);
+    const status = 200;
+    const message = 'User is successfully logged in';
+    return Helper.handleSuccess(res, status, message, token);
   }
 
   //
-  findUser(userId) {
-    return this.users.find((oneUser) => oneUser.userId === parseInt(userId, 10));
+   findUser(checkAgainst, toFind) {
+    // return this.users.find((oneUser) => oneUser.userId === parseInt(userId, 10));
+    const userList = this.findUsers();
+    // return Helper.findObjectByProp(userList, checkAgainst, toFind) 
+
+    return Helper.findObjectByProp(userList, checkAgainst, toFind)
   }
 
   //
@@ -102,11 +135,22 @@ class User {
   }
 
   // Change to mentor
-  changeToMentor(userId) {
-    const user = this.findUser(userId);
-    const index = this.users.indexOf(user);
+  changeToMentor(data, res) {
+    
+    const allUsers = this.findUsers();
+    const userExist = Helper.findObjectByProp(allUsers, 'userId', parseInt(data,10))
+
+    if (userExist === undefined) {
+      const status = 404;
+      const error = 'User Not Found';
+      return Helper.handleError(res, status, error);
+    }
+    const index = this.users.indexOf(userExist);
     this.users[index].role = 'Mentor';
-    return this.users[index];
+    const status = 200;
+    const message = 'User account changed to mentor';
+    const result = { message : 'User account changed to mentor'};
+    return Helper.handleSuccess(res, status,message, result);
   }
 }
 export default new User();

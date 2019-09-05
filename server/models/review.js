@@ -39,7 +39,7 @@ class Review {
 
   createReview(data, userData) {
     const newReview = {
-      sessionId: 'data.sessionId',
+      sessionId: 'data.sessionId', //Id will be fetched in header
       mentorId: data.mentorId,
       menteeId: userData.userId,
       menteeFullName: `${userData.firstName} ${userData.lastName}`,
@@ -50,9 +50,9 @@ class Review {
     return newReview;
   }
 
-  findReview(sessionId) {
-    return this.reviews.find((oneSession) => oneSession.sessionId === parseInt(sessionId, 10));
-  }
+  // findReview(sessionId) {
+  //   return this.reviews.find((oneSession) => oneSession.sessionId === parseInt(sessionId, 10));
+  // }
 
   deleteReview(reviewId) {
     const review = this.findReview(reviewId);
