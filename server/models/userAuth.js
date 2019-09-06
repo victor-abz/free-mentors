@@ -75,8 +75,8 @@ class User {
 
     const status = 201;
     const message = 'User created successfully';
-    const datame = {token: token , message: 'User created successfully'}
-    return Helper.handleSuccess(res, status, message, datame);
+    const result = {token: token , message: 'User created successfully'}
+    return Helper.handleSuccess(res, status, message, result);
 
     // return token;
   }

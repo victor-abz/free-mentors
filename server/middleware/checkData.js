@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import mentorModel from '../models/mentors';
 import userModel from '../models/userAuth';
 import Helper from '../helpers/helper';
+import url from 'url'
 import sessionModel from '../models/sessions'
 
 const checkData = {
@@ -17,28 +18,7 @@ const checkData = {
       next();
   },
 
-// Check if the User with the email is existing in our Datastructure
-  doesEmailExist(req, res, next) {
-    const user = mentorModel.findUser('email', req.body.email);
-    if (user === undefined) {
-      return res.status(400).json({
-        status: 400,
-        error: 'The Email you provided is incorrect',
-      });
-    }
-    next();
-  },
-// Check if a user with that email exists
-  doUserExist(req, res, next) {
-    const user = userModel.findUser('email', req.body.email);
-    if (user !== undefined) {
-      return res.status(400).json({
-        status: 400,
-        error: 'A User with this Email Exists',
-      });
-    }
-    next();
-  },
+
 // Check the ID passed in the Params exists
   doIdExist(req, res, next) {
     const user = userModel.findUser('userId', req.body.userId);
@@ -57,6 +37,27 @@ const checkData = {
       });
     }
     next();
+  },
+
+  userExist(req, res, next) {
+    const allUsers = userModel.findUsers();
+    const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
+
+    if(req.path == '/auth/login' && userExist){
+     return next();
+    }
+    if(req.path === '/auth/signup'){
+      if(userExist){
+        const status = 400;
+        const error = 'User Exist';
+        return Helper.handleError(res, status, error);
+      }
+        return next();
+      
+    }
+    const status = 400;
+    const error = 'User not Found, Please Signup';
+    return Helper.handleError(res, status, error);
   },
 
 // Verify token 
@@ -88,20 +89,9 @@ const checkData = {
       const status = 400;
       const error = 'Some Values are missing';
       return Helper.handleError(res, status, error);
-      // return res.status(400).json({
-      //   status: 400,
-      //   error: 'Some values are missing',
-      // });
     } 
     next();
   },
-
-  // isSessionReviewable: (req, res, next) => {
-  //   const allSession = sessionModel.findSessions();
-  //   const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(req.params.sessionId,10))
-  //   if(sessionId === 'undefined')
-
-  // }
 
 }
 

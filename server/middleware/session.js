@@ -7,30 +7,6 @@ import sessionModel from '../models/sessions'
 
 const checkData = {
 
-// Compare Passwords
-  comparePassword(req, res, next) {
-   const  password = req.body.password;
-   const user = userModel.findUser('email',req.body.email);
-   if (!bcrypt.compareSync(password, user.password)){
-    return res.status(400).json({
-      status: 400,
-      error: 'The credentials you provided is incorrect',
-    });
-   }
-   next();
-  },
-
-// Check if Email is Valid
-  isValidEmail(req, res, next) {
-    if (!(/\S+@\S+\.\S+/.test(req.body.email))) {
-          return res.status(400).json({
-            status: 400,
-            error: 'Please enter a valid email address',
-          });
-      }
-      next();
-  },
-
 // Check if the User with the email is existing in our Datastructure
   doesEmailExist(req, res, next) {
     const user = mentorModel.findUser('email', req.body.email);
@@ -106,14 +82,7 @@ const checkData = {
       });
     } 
     next();
-  },
-
-//   isSessionReviewable: (req, res, next) => {
-//     const allSession = sessionModel.findSessions();
-//     const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(req.params.sessionId,10))
-//     if(sessionId === 'undefined')
-
-//   }
+  }
 
 }
 

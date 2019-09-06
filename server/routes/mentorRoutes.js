@@ -4,14 +4,7 @@ import mentorController from '../controllers/mentorController';
 
 const mentor = express.Router();
 
-mentor.get('/', mentorController.getMentors);
-mentor.get('/:mentorId', mentorController.getMentor);
-
-// mentor.get('/:mentorId',checkData.isMentor, mentorController.getMentor);
-
-// // Mentor Routes
-// mentor.get('/', mentorController.getMentors);
-// mentor.get('/:mentorId', checkData.isMentor, mentorController.getMentor);
-
+mentor.get('/',checkData.verifyToken, mentorController.getMentors);
+mentor.get('/:mentorId',checkData.verifyToken, mentorController.getMentor);
 
 export default mentor;

@@ -54,16 +54,6 @@ const sessionController = {
   // Deleting Data
   deleteReview: (req, res) => {
     const result = reviewModel.deleteReview(req.params.sessionId, res);
-    // const status = 201;
-    // const message = 'undefined';
-    // return Helper.handleSuccess(res, status, message, result);
-
-    // return res.status(200).json({
-    //   status: 200,
-    //   data: {
-    //     message: 'Review successfully deleted',
-    //   },
-    // });
   },
 
 };

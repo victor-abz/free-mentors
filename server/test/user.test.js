@@ -3,30 +3,17 @@ import chaiHttp from 'chai-http';
 import { expect } from 'chai';
 import  chai  from 'chai';
 import app from '../../app';
+import mocks from './mocks/mocks'
 // Configure chai
 chai.use(chaiHttp);
 
 const router = () => chai.request(app);
-const testUser = {
-    "firstName": "menthee", 
-    "lastName": "tester",
-    "email": "menteh@freementors.com",
-    "password": "mentor",
-    "address": "Kigali-Rwanda",
-    "bio": "EveryThing",
-    "occupation": "Developer",
-    "expertise": "Googling, Node Js, Javascript, SQL"
-};
-const testLogin = {
-    "email": "menteh@freementors.com",
-    "password": "mentor",
-};
 
 describe('User Authorization', () => {
   it('should sign up a user', (done) => {
     router()
       .post('/api/v1/auth/signup')
-      .send(testUser)
+      .send(mocks.testSignUp)
       .end((error, response) => {
         expect(response).to.have.status(201);
         expect(response.body).to.be.a('object');
@@ -40,7 +27,7 @@ describe('User Authorization', () => {
   it('should login a user', (done) => {
     router()
       .post('/api/v1/auth/login')
-      .send(testLogin)
+      .send(mocks.testLogin)
       .end((error, response) => {
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');
@@ -54,7 +41,6 @@ describe('User Authorization', () => {
     router()
       .get('/api/v1/users')
       .end((error, response) => {
-        console.log(response.body)
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');
         done(error);
