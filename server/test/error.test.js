@@ -1,6 +1,8 @@
 // Import the dependencies for testing
 import chaiHttp from 'chai-http';
+
 import chai, { expect } from 'chai';
+
 
 import app from '../../app';
 import sessions from '../models/sessions';
@@ -18,4 +20,5 @@ describe('Session test', () => {
         expect(response.body).to.be.a('object');
       });
   });
+
 });

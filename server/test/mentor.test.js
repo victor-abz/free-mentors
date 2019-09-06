@@ -1,10 +1,12 @@
 // Import the dependencies for testing
 import chaiHttp from 'chai-http';
+
 import chai, { expect } from 'chai';
 
 import app from '../../app';
 import mentors from '../models/mentors';
 import mocks from './mocks/mocks';
+
 // Configure chai
 chai.use(chaiHttp);
 let token = null;
@@ -38,6 +40,7 @@ describe('Mentor test', () => {
   it('should get one mentor', (done) => {
     router()
       .get(`/api/v1/mentors/${mentorId}`)
+
       .set('token', token)
       .end((error, response) => {
         expect(response).to.have.status(200);
@@ -53,6 +56,7 @@ describe('Mentor test', () => {
       .end((error, response) => {
         expect(response).to.have.status(404);
         expect(response.body).to.be.a('object');
+
 
         done(error);
       });

@@ -3,7 +3,9 @@ import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 
 import app from '../../app';
+
 import mocks from './mocks/mocks';
+
 // Configure chai
 chai.use(chaiHttp);
 let token = null;
@@ -53,6 +55,7 @@ describe('User Authorization', () => {
   it('Should get all users', (done) => {
     router()
       .get('/api/v1/users')
+
       .set('token', token)
       .end((error, response) => {
         expect(response).to.have.status(200);

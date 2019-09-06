@@ -1,4 +1,5 @@
 import Helper from '../helpers/helper';
+
 class User {
   //
   constructor() {
@@ -60,6 +61,7 @@ class User {
     };
     this.users.push(newUser);
     const payload = {
+
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
@@ -68,11 +70,14 @@ class User {
       occupation: newUser.occupation,
       expertise: newUser.expertise,
     };
+
     const token = Helper.generateToken(payload);
 
     const status = 201;
     const message = 'User created successfully';
+
     const result = { token, message: 'User created successfully' };
+
     return Helper.handleSuccess(res, status, message, result);
 
     // return token;
@@ -80,6 +85,7 @@ class User {
 
   // Login user
   loginUser(data, res) {
+
     const allUsers = this.findUsers();
     const userExist = Helper.findObjectByProp(allUsers, 'email', data.email);
 
@@ -98,13 +104,16 @@ class User {
     const status = 200;
     const message = 'User is successfully logged in';
     const result = { token };
+
     return Helper.handleSuccess(res, status, message, result);
   }
 
   //
+
   findUser(checkAgainst, toFind) {
     const userList = this.findUsers();
     return Helper.findObjectByProp(userList, checkAgainst, toFind);
+
   }
 
   //
@@ -113,6 +122,7 @@ class User {
   }
 
   // Change to mentor
+
   changeToMentor(role, user, res) {
     if (role === 'admin') {
       const allUsers = this.findUsers();
@@ -132,6 +142,7 @@ class User {
     const status = 401;
     const error = 'Insufficient provilege. Please sign in';
     return Helper.handleError(res, status, error);
+
   }
 }
 export default new User();

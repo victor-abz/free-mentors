@@ -1,4 +1,6 @@
+
 import Helper from '../helpers/helper';
+
 
 class Session {
   //
@@ -71,6 +73,7 @@ class Session {
     const error = 'You are not allowed to change status';
     return Helper.handleError(res, status, error);
   }
+
 
 
   // Find session

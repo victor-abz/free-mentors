@@ -1,5 +1,7 @@
 import mentorModel from '../models/mentors';
+
 import Helper from '../helpers/helper';
+
 
 const mentorController = {
 
@@ -9,6 +11,7 @@ const mentorController = {
     const status = 200;
     const message = 'Fetched all mentors';
     return Helper.handleSuccess(res, status, message, mentors);
+
   },
 
   // Getting one mentor

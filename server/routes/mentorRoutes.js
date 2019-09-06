@@ -7,4 +7,5 @@ const mentor = express.Router();
 mentor.get('/', checkData.verifyToken, mentorController.getMentors);
 mentor.get('/:mentorId', checkData.verifyToken, mentorController.getMentor);
 
+
 export default mentor;

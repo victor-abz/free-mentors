@@ -1,5 +1,7 @@
+
 import Helper from '../helpers/helper';
 import sessionModel from './sessions';
+
 
 class Review {
   //
@@ -39,6 +41,7 @@ class Review {
       },
     ];
   }
+
 
   createReview(review, session, userData, res) {
     const sessionId = parseInt(session);
@@ -80,19 +83,24 @@ class Review {
 
   deleteReview(sessionId, res) {
     const allReviews = this.findReviews();
+
     const review = Helper.findObjectByProp(allReviews, 'sessionId', parseInt(sessionId, 10));
     if (!review) {
       const status = 400;
       const error = 'Session review not allowed';
       return Helper.handleError(res, status, error);
     }
+
     const index = this.reviews.indexOf(review);
     this.reviews.splice(index, 1);
 
     const status = 200;
+
     const message = 'Review successfully deleted';
     const result = { message: 'Review successfully deleted' };
     return Helper.handleSuccess(res, status, message, result);
+
   }
+
 }
 export default new Review();

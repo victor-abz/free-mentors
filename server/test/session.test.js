@@ -1,10 +1,12 @@
 // Import the dependencies for testing
 import chaiHttp from 'chai-http';
+
 import chai, { expect } from 'chai';
 
 import app from '../../app';
 import sessions from '../models/sessions';
 import mocks from './mocks/mocks';
+
 // Configure chai
 chai.use(chaiHttp);
 
@@ -77,6 +79,7 @@ describe('Session test', () => {
       .end((error, response) => {
         expect(response).to.have.status(401);
         expect(response.body).to.be.a('object');
+
 
         done(error);
       });
