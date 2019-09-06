@@ -1,3 +1,4 @@
+import Helper from '../helpers/helper';
 class Mentor {
   //
   constructor() {
@@ -42,8 +43,23 @@ class Mentor {
   }
 
   // Function to find one mentor
-  findMentor(mentorId) {
-    return this.mentors.find((oneMentor) => oneMentor.mentorId === parseInt(mentorId, 10));
+  findMentor(data, res) {
+    // return this.mentors.find((oneMentor) => oneMentor.mentorId === parseInt(mentorId, 10));
+    const allUsers = this.findMentors();
+    const userExist = Helper.findObjectByProp(allUsers, 'mentorId', parseInt(data,10))
+
+    if (userExist === undefined) {
+      const status = 404;
+      const error = 'Mentor Not Found';
+      return Helper.handleError(res, status, error);
+    }
+    const status = 200;
+    const message = 'undefined';
+    const result = userExist;
+    return Helper.handleSuccess(res, status,message, result);
+  // }
+
+
   }
 
   // Function to find all mentors

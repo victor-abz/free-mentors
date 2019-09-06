@@ -3,55 +3,70 @@ import chaiHttp from 'chai-http';
 import { expect } from 'chai';
 import  chai  from 'chai';
 import app from '../../app';
+import sessions from '../models/sessions';
 import mocks from './mocks/mocks'
 // Configure chai
 chai.use(chaiHttp);
 
 const router = () => chai.request(app);
+let token = null;
+let sessionId = null;
 
-describe('User Authorization', () => {
-  it('should sign up a user', (done) => {
+describe('Session test', () => {
+    beforeEach(()=>{
+        const allSessions = sessions.findSessions();
+        sessionId=allSessions[0].sessionId;
+    })
+    it('should login a user', () => {
+        router()
+          .post('/api/v1/auth/login')
+          .send(mocks.testLogin)
+          .end((error, response) => {
+            token = response.body.data.token;
+          });
+      });
+  it('should create session', (done) => {
     router()
-      .post('/api/v1/auth/signup')
-      .send(mocks.testSignUp)
+      .post('/api/v1/sessions')
+      .set('token',token)
+      .send(mocks.sessionData)
       .end((error, response) => {
         expect(response).to.have.status(201);
         expect(response.body).to.be.a('object');
-        expect(response.body).to.have.property('message').that.contain('User created successfully');
-        expect(response.body.data).to.be.an('object');
-        expect(response.body.data).that.contain.property('token');
-        expect(response.body.data).that.contain.property('message');
         done(error);
       });
   });
-  it('should login a user', (done) => {
+  it('should get list of sessions', (done) => {
     router()
-      .post('/api/v1/auth/login')
-      .send(mocks.testLogin)
-      .end((error, response) => {
-        expect(response).to.have.status(200);
-        expect(response.body).to.be.a('object');
-        expect(response.body).to.have.property('message').that.contain('User is successfully logged in');
-        expect(response.body.data).to.be.an('object');
-        expect(response.body.data).that.contain.property('token');
-        done(error);
-      });
-  });
-  it('Should get all users', (done) => {
-    router()
-      .get('/api/v1/users')
+      .get('/api/v1/sessions')
+      .set('token',token)
       .end((error, response) => {
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');
         done(error);
       });
   });
-  it('Should change user to a mentor', (done) => {
+  it('should accept session', (done) => {
+   
     router()
-      .patch('/api/v1/users/1')
+      .patch(`/api/v1/sessions/${sessionId}/accept`)
+      .set('token',token)
       .end((error, response) => {
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');
+       
+        done(error);
+      });
+  });
+  it('should reject session', (done) => {
+   
+    router()
+      .patch(`/api/v1/sessions/${sessionId}/reject`)
+      .set('token',token)
+      .end((error, response) => {
+        expect(response).to.have.status(200);
+        expect(response.body).to.be.a('object');
+       
         done(error);
       });
   });
