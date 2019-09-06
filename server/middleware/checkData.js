@@ -19,6 +19,7 @@ const checkData = {
   },
 
 
+
   userExist(req, res, next) {
     const allUsers = userModel.findUsers();
     const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
@@ -56,7 +57,7 @@ const checkData = {
       next();
     })
   },
- 
+
  // Check Required Fields before submit
   checkInput: (req, res, next) => {    
     if (!req.body.email || !req.body.password) {
