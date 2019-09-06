@@ -5,6 +5,6 @@ import userAuthController from '../controllers/userAuthController';
 const userAuth = express.Router();
 
 userAuth.post('/auth/signup', checkData.checkInput, checkData.isValidEmail, checkData.userExist, userAuthController.createUser);
-userAuth.post('/auth/login', checkData.checkInput, checkData.isValidEmail,checkData.userExist,  userAuthController.loginUser);
+userAuth.post('/auth/login', checkData.checkInput, checkData.isValidEmail, checkData.userExist, userAuthController.loginUser);
 
 export default userAuth;

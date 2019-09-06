@@ -1,4 +1,5 @@
-import Helper from '../helpers/helper'
+import Helper from '../helpers/helper';
+
 class Session {
   //
   constructor() {
@@ -20,20 +21,20 @@ class Session {
         status: 'pending',
       },
       {
-        sessionId: 2,
+        sessionId: 3,
         mentorId: 3,
         menteeId: 4,
         questions: 'How to run npm',
         menteeEmail: 'john@freementee.com',
-        status: 'pending',
+        status: 'accepted',
       },
       {
-        sessionId: 2,
+        sessionId: 4,
         mentorId: 5,
         menteeId: 4,
         questions: 'How to run npm',
         menteeEmail: 'john@freementee.com',
-        status: 'pending',
+        status: 'rejected',
       },
     ];
   }
@@ -52,21 +53,23 @@ class Session {
     return newSession;
   }
 
- 
-// Change Status to Accpeted or Rejected
-  changeStatus(changeTo,data, res) {
-    
+
+  // Change Status to Accpeted or Rejected
+  changeStatus(changeTo, data, res) {
     const allSession = this.findSessions();
-    const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(data,10))
+    const sessionExist = Helper.findObjectByProp(allSession, 'sessionId', parseInt(data, 10));
 
     const index = this.sessions.indexOf(sessionExist);
-    this.sessions[index].status = changeTo;
-    const result = this.sessions[index];
-    
-    const status = 200;
-    const message = `Session is now ${changeTo}`;
-
-    return Helper.handleSuccess(res, status,message, result);
+    if (this.sessions[index].status === 'pending') {
+      this.sessions[index].status = changeTo;
+      const result = this.sessions[index];
+      const status = 200;
+      const message = `Session is now ${changeTo}`;
+      return Helper.handleSuccess(res, status, message, result);
+    }
+    const status = 401;
+    const error = 'You are not allowed to change status';
+    return Helper.handleError(res, status, error);
   }
 
 

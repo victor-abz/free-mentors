@@ -1,7 +1,4 @@
 import Helper from '../helpers/helper';
-import checkData from '../middleware/checkData';
-
-
 class User {
   //
   constructor() {
@@ -63,19 +60,19 @@ class User {
     };
     this.users.push(newUser);
     const payload = {
-      firstName : newUser.firstName,
-      lastName : newUser.lastName,
-      email : newUser.email,
-      address : newUser.address,
-      bio : newUser.bio ,
-      occupation : newUser.occupation ,
-      expertise : newUser.expertise ,
-    }
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      address: newUser.address,
+      bio: newUser.bio,
+      occupation: newUser.occupation,
+      expertise: newUser.expertise,
+    };
     const token = Helper.generateToken(payload);
 
     const status = 201;
     const message = 'User created successfully';
-    const result = {token: token , message: 'User created successfully'}
+    const result = { token, message: 'User created successfully' };
     return Helper.handleSuccess(res, status, message, result);
 
     // return token;
@@ -83,12 +80,10 @@ class User {
 
   // Login user
   loginUser(data, res) {
-    // const userExist = this.users.find((oneUser) => oneUser.email === data.email);
     const allUsers = this.findUsers();
-    const userExist = Helper.findObjectByProp(allUsers, 'email', data.email)
+    const userExist = Helper.findObjectByProp(allUsers, 'email', data.email);
 
     if (!Helper.comparePassword(userExist.password, data.password)) {
-      // return 'The credentials you provided is incorrect';
       const status = 400;
       const error = 'The credentials you provided is incorrect';
       return Helper.handleError(res, status, error);
@@ -97,22 +92,19 @@ class User {
     const payload = {
       email: userExist.email,
       userId: userExist.userId,
-      role: userExist.role
-    }
+      role: userExist.role,
+    };
     const token = Helper.generateToken(payload);
     const status = 200;
     const message = 'User is successfully logged in';
-    const result = {token : token};
+    const result = { token };
     return Helper.handleSuccess(res, status, message, result);
   }
 
   //
-   findUser(checkAgainst, toFind) {
-    // return this.users.find((oneUser) => oneUser.userId === parseInt(userId, 10));
+  findUser(checkAgainst, toFind) {
     const userList = this.findUsers();
-    // return Helper.findObjectByProp(userList, checkAgainst, toFind) 
-
-    return Helper.findObjectByProp(userList, checkAgainst, toFind)
+    return Helper.findObjectByProp(userList, checkAgainst, toFind);
   }
 
   //
@@ -121,17 +113,25 @@ class User {
   }
 
   // Change to mentor
-  changeToMentor(data, res) {
-    
-    const allUsers = this.findUsers();
-    const userExist = Helper.findObjectByProp(allUsers, 'userId', parseInt(data,10))
-
-    const index = this.users.indexOf(userExist);
-    this.users[index].role = 'Mentor';
-    const status = 200;
-    const message = 'User account changed to mentor';
-    const result = { message : 'User account changed to mentor'};
-    return Helper.handleSuccess(res, status,message, result);
+  changeToMentor(role, user, res) {
+    if (role === 'admin') {
+      const allUsers = this.findUsers();
+      const userExist = Helper.findObjectByProp(allUsers, 'userId', parseInt(user, 10));
+      const index = this.users.indexOf(userExist);
+      if (this.users[index].role === 'Mentor') {
+        const status = 400;
+        const error = 'The User is already a Mentor';
+        return Helper.handleError(res, status, error);
+      }
+      this.users[index].role = 'Mentor';
+      const status = 200;
+      const message = 'User account changed to mentor';
+      const result = { message: 'User account changed to mentor' };
+      return Helper.handleSuccess(res, status, message, result);
+    }
+    const status = 401;
+    const error = 'Insufficient provilege. Please sign in';
+    return Helper.handleError(res, status, error);
   }
 }
 export default new User();

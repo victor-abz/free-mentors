@@ -7,11 +7,11 @@ const sessionController = {
   createSessions: (req, res) => {
     const data = sessionModel.createSession(req.body, req.userData);
     const status = 201;
-    const message = 'undefined';
+    const message = 'Session request was sent, waiting mentor approval';
     return Helper.handleSuccess(res, status, message, data);
   },
   // Getting All data
-  getSessions: (req, res) => { // Middleware for Checking Role Needed    
+  getSessions: (req, res) => {
     const roles = ['user', 'mentor', 'admin'];
     const userRole = Helper.getRole(req.userData.role);
 
@@ -21,7 +21,7 @@ const sessionController = {
       return Helper.handleError(res, status, error);
     }
     const allSessions = sessionModel.findSessions();
-    const userSessions = Helper.filterObjectByProp(allSessions, userRole, req.userData.userId)
+    const userSessions = Helper.filterObjectByProp(allSessions, userRole, req.userData.userId);
     if (req.userData.role === 'admin') {
       const status = 200;
       const message = 'undefined';
@@ -31,11 +31,10 @@ const sessionController = {
     const status = 200;
     const message = 'undefined';
     return Helper.handleSuccess(res, status, message, userSessions);
-
   },
 
 
-  // Acceppt Session
+  // Accept Session
   acceptSession: (req, res) => {
     sessionModel.changeStatus('Accepted', req.params.sessionId, res);
   },
@@ -45,15 +44,17 @@ const sessionController = {
   },
 
   createReview: (req, res) => {
-    const data = reviewModel.createReview(req.body, req.params.sessionId, req.userData);
-    const status = 200;
-    const message = 'undefined';
-    return Helper.handleSuccess(res, status, message, data);
+    return reviewModel.createReview(req.body, req.params.sessionId, req.userData, res);
   },
 
   // Deleting Data
   deleteReview: (req, res) => {
-    const result = reviewModel.deleteReview(req.params.sessionId, res);
+    if (req.userData.role === 'admin') {
+      return reviewModel.deleteReview(req.params.sessionId, res);
+    }
+    const status = 401;
+    const error = 'You are not allowed to change status';
+    return Helper.handleError(res, status, error);
   },
 
 };
