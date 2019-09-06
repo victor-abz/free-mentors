@@ -19,25 +19,6 @@ const checkData = {
   },
 
 
-// Check the ID passed in the Params exists
-  doIdExist(req, res, next) {
-    const user = userModel.findUser('userId', req.body.userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    next();
-  },
-// Verify if someone is a mentor
-  isMentor(req, res, next) {
-    const mentor = mentorModel.findUser('mentorId', req.params.id);
-    
-    if (!mentor) {
-      return res.status(404).json({
-        message: 'Mentor not found',
-      });
-    }
-    next();
-  },
 
   userExist(req, res, next) {
     const allUsers = userModel.findUsers();
@@ -76,13 +57,7 @@ const checkData = {
       next();
     })
   },
- // Check Required Fields before submit
-  requiredFieldSession: (req, res, next) => {
-    if (!req.body.questions || !req.body.mentorId) {
-      return res.status(400).json({ message: 'All fields are required' })
-    }    
-    next();
-  },
+
  // Check Required Fields before submit
   checkInput: (req, res, next) => {    
     if (!req.body.email || !req.body.password) {
