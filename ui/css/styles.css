@@ -1,6 +1,10 @@
 * {
 	box-sizing: border-box;
 }
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 body {
 	margin: 0;
@@ -589,16 +593,17 @@ _______________________________ */
 
 /*-------------- FOOTER ----------------------*/
 .copyrights {
-	position: fixed;
+	/* position: fixed; */
+	position: absolute;
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	height: 5%;
+	padding: 0.5%;
 	background-color: #f4f4f4;
 	color: white;
 	text-align: center;
-	padding: 8px 0em;
-	text-align: center;
-	z-index: 0;
+	z-index:999;
 	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -633,7 +638,7 @@ _______________________________ */
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	grid-gap: 20px;
 	align-items: stretch;
-	height: 300px;
+	height: 100%;
 }
 
 .card {
@@ -1343,11 +1348,11 @@ input[type=checkbox] {
   }
 
   .cards-container{
-
-	width: 100%;
-	height: 647px;
+	width: 98%;
+	height: 98%;
 	overflow-y: scroll;
 	top:0;
+	z-index: 14;
   }
 
 /* ---------------- Adding Responsive ness ----------- */
@@ -1380,6 +1385,12 @@ input[type=checkbox] {
 		z-index: 2;
 		overflow-x: scroll;
 	}
+	.copyrights {
+		position: absolute;
+		width: 100%;
+		max-height: 50%;
+		font-size: 80%;
+	}
 }
 @media (min-width: 1300px) and (max-width: 1699px) {
 	.content-area {
@@ -1405,6 +1416,12 @@ input[type=checkbox] {
 		margin-top: 70px;
 		z-index: 2;
 		overflow-x: scroll;
+	}
+	.copyrights {
+		position: absolute;
+		width: 100%;
+		max-height: 50%;
+		font-size: 100%;
 	}
 }
 /* 
@@ -1460,9 +1477,9 @@ input[type=checkbox] {
 	}
 	/*-------------- FOOTER ----------------------*/
 	.copyrights {
-		position: fixed;
+		position: absolute;
 		width: 100%;
-		max-height: 90%;
+		max-height: 80%;
 		font-size: 90%;
 	}
 }
@@ -1533,7 +1550,7 @@ input[type=checkbox] {
 	}
 	/*-------------- FOOTER ----------------------*/
 	.copyrights {
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		max-height: 78%;
 		font-size: 78%;
@@ -1618,7 +1635,7 @@ input[type=checkbox] {
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 	.copyrights {
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		max-height: 70%;
 		font-size: 70%;
@@ -1655,7 +1672,7 @@ input[type=checkbox] {
 	}
 	/*-------------- FOOTER ----------------------*/
 	.copyrights {
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		max-height: 50%;
 		font-size: 50%;
@@ -1866,7 +1883,7 @@ input[type=checkbox] {
 		overflow-x: scroll;
 	}
 	.copyrights {
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		max-height: 15px;
 		font-size: 30%;
