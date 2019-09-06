@@ -1,6 +1,6 @@
 # free-mentors
 
- [![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=ft-integrating-coveralls-%23168236739)](https://travis-ci.org/victor-abz/free-mentors) [![Coverage Status](https://coveralls.io/repos/github/victor-abz/free-mentors/badge.svg?branch=ft-integrating-coveralls-%23168236739)](https://coveralls.io/github/victor-abz/free-mentors?branch=ft-integrating-coveralls-%23168236739) [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Build Status](https://travis-ci.org/victor-abz/free-mentors.svg?branch=develop)](https://travis-ci.org/victor-abz/free-mentors) [![Coverage Status](https://coveralls.io/repos/github/victor-abz/free-mentors/badge.svg)](https://coveralls.io/github/victor-abz/free-mentors) [![Maintainability](https://api.codeclimate.com/v1/badges/9880aa631e8cfe5c094d/maintainability)](https://codeclimate.com/github/victor-abz/free-mentors/maintainability)
 
 ![](ui/images/logo-freementors.png)
  
