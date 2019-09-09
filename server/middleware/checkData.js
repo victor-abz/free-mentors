@@ -21,14 +21,8 @@ const checkData = {
 
 
   async userExist(req, res, next) {
-    // const allUsers = userModel.findUsers();
-    // const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
 
     const userExist = await new db().findUsers('users','email', req.body.email);
-		// if(result.rows[0].count === '0'){
-		// 	await this.addUser(new User('admin@freementors.com', 'Admin', 'Super', '$2b$08$GJqUT02XgD.4JEyQzIF2zufHCGRpbJrWwZhXBdSQBVTRYp9L3qb2q', 'Kigali -Rwanda', 'Nyarugenege', 'Node Js', '5 years', 'Admin'));
-		// }
-
 
     if(req.path == '/auth/login' && userExist.rows[0].count !== '0'){
      return next();

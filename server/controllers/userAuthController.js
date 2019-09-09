@@ -4,14 +4,9 @@ import Db from '../db';
 
 const userAuthController = {
   createUser: (req, res) => new Db().addUser(req.body, res),
-  // Login User
-  loginUser: (req, res) => {
-    new Db().loginUser(req.body, res);
-  },
-  // Updating Data
-  changeToMentor: (req, res) => new Db().changeToMentor('mentor', req.params.userId, res),
+  loginUser: (req, res) => new Db().loginUser(req.body, res),
 
-  // Getting All Users
+  changeToMentor: (req, res) => new Db().changeToMentor('mentor', req.params.userId, res),
   getUsers: (req, res) => {
     if (req.userData.role === 'admin') {
       const result = new Db().findAll('users', res);

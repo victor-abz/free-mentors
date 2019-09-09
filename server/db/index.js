@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-// import { User } from '../models/userAuth';
 import Helper from '../helpers/helper';
 
 dotenv.config();
@@ -16,8 +15,9 @@ con.on('connect', () => {
 
 class Database {
   async addUser(data, res) {
-    const hashPassword = Helper.hashPassword(data.password);
-    const newUser = await con.query(`Insert into 
+    const {firstName, lastName, email, password, address, bio, occupation, expertise} = data
+    const hashPassword = Helper.hashPassword(password);
+    const newUser = await con.query(`INSERT INTO
     users(
       firstName, 
       lastName, 
@@ -28,40 +28,32 @@ class Database {
       occupation, 
       expertise, 
       role) 
-    values(
-      '${data.firstName}',
-      '${data.lastName}',
-      '${data.email}',
+    VALUES(
+      '${firstName}',
+      '${lastName}',
+      '${email}',
       '${hashPassword}',
-      '${data.address}',
-      '${data.bio}',
-      '${data.occupation}',
-      '${data.expertise}',
+      '${address}',
+      '${bio}',
+      '${occupation}',
+      '${expertise}',
       'user'
-        ) returning firstName, 
-        lastName, 
-        email,  
-        address, 
-        bio, 
-        occupation, 
-		expertise`);
+        ) RETURNING firstName, lastName,email,  address, bio, occupation, expertise`);
+    
+    const {rows: result} = newUser;
 
-    return Helper.handleSuccess(res, 201, 'User created successfully', newUser.rows[0]);
+    return Helper.handleSuccess(res, 201, 'User created successfully', result);
   }
 
   async loginUser(data, res) {
-    const userFound = await this.findByProp('users', 'email', data.email);
-    const userExist = userFound.rows[0];
+    const {email, password: inputPassword} = data
+    const {rows} = await this.findByProp('users', 'email', email);
+    const [{userid: userId, password, role}] = rows
 
-    if (!Helper.comparePassword(userExist.password, data.password)) {
+    if (!Helper.comparePassword(password, inputPassword)) {
       return Helper.handleError(res, 400, 'The credentials you provided is incorrect');
-    }
-
-    const payload = {
-      email: userExist.email,
-      userId: userExist.userId,
-      role: userExist.role,
-    };
+    } 
+    const payload = {userId, email, role };
 
     const token = Helper.generateToken(payload);
     return Helper.handleSuccess(res, 200, 'User is successfully logged in', token);
@@ -92,21 +84,6 @@ class Database {
     const result = await con.query(`SELECT COUNT(1) FROM ${table} WHERE ${column} = '${value}';`);
     return result;
   }
-  // async addSession(data) {
-  // 	const newSession = await con.query(`Insert into sessions
-  //		 (mentorId, menteeId, questions, menteeEmail, status) values(
-  // 		'${data.mentorId}',
-  // 		'${data.menteeId}',
-  // 		'${data.questions}',
-  // 		'${data.menteeeEmail}',
-  // 		'${data.status}'
-  // 	) returning *`);
-  // 	return newSession;
-  // }
-  // async updateSession(status, id) {
-  // 	const result = await con.query(`UPDATE sessions SET status = '${status}' WHERE sessionId = ${id};`);
-  // 	return result;
-  // }
 
   async createTables() {
     await con.query(`
@@ -117,13 +94,13 @@ class Database {
             CREATE TABLE IF NOT EXISTS REVIEWS (sessionId INTEGER REFERENCES sessions(sessionId) ON DELETE CASCADE,menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,menteefirstName VARCHAR(300),menteelastName VARCHAR(300),remark VARCHAR(300));
         `);
 
-    const result = await this.findUsers('users', 'email', 'admin@freementors.com');
+    const result = await this.findUsers('users', 'email', process.env.ADMIN_MAIL);
     if (result.rows[0].count === '0') {
       const payload = {
         firstName: 'admin',
         lastName: 'test',
-        email: 'admin@freementors.com',
-        password: 'mentor',
+        email: process.env.ADMIN_MAIL,
+        password: process.env.ADMIN_PW,
         address: 'Kigali',
         bio: 'Passionate about IT',
         occupation: 'Developer',
