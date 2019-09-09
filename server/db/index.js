@@ -60,12 +60,12 @@ class Database {
   }
 
   async findAll(table, res) {
-    const result = await con.query(`SELECT * FROM ${table}`);
-    return Helper.handleSuccess(res, 200, `All ${table} Fetched`, result.rows);
+    const {rows: result} = await con.query(`SELECT * FROM ${table}`);
+    return Helper.handleSuccess(res, 200, `All ${table} Fetched`, result);
   }
 
   async findByProp(table, column, value) {
-    const result = await con.query(`SELECT * FROM ${table} WHERE ${column}='${value}'`);
+    const {rows: result} = await con.query(`SELECT * FROM ${table} WHERE ${column}='${value}'`);
     return result;
   }
 

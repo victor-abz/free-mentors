@@ -1,16 +1,12 @@
-import mentorModel from '../models/mentors';
 import Helper from '../helpers/helper';
+import Db from '../db';
 
 const mentorController = {
 
-  // Getting All data
-  getMentors: (req, res) => {
-    const mentors = mentorModel.findMentors();
-    const status = 200;
-    const message = 'Fetched all mentors';
-    return Helper.handleSuccess(res, status, message, mentors);
+  getMentors: async (req, res) => {
+    const result = await new Db().findByProp('users', 'role', 'mentor');
+    return Helper.handleSuccess(res, 200, 'You are viewing all Mentors', result);
   },
-
   // Getting one mentor
   getMentor: (req, res) => {
     mentorModel.findMentor(req.params.mentorId, res);
