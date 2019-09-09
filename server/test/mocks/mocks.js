@@ -87,8 +87,4 @@ const mocks = {
 
 
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 export default mocks;
