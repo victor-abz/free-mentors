@@ -1,6 +1,9 @@
 import mentorModel from '../models/mentors';
 import Helper from '../helpers/helper';
 
+import Helper from '../helpers/helper';
+
+
 const mentorController = {
 
   // Getting All data

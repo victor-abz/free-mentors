@@ -94,5 +94,6 @@ class Review {
     const result = { message: 'Review successfully deleted' };
     return Helper.handleSuccess(res, status, message, result);
   }
+
 }
 export default new Review();

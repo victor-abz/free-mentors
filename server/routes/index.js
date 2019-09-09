@@ -5,6 +5,12 @@ import mentorRoutes from './mentorRoutes';
 import sessionRoutes from './sessionRoutes';
 import userRoutes from './userRoutes';
 
+import authRoutes from './authRoutes';
+
+import mentorRoutes from './mentorRoutes';
+import sessionRoutes from './sessionRoutes';
+import userRoutes from './userRoutes';
+
 import userAuthController from '../controllers/userAuthController';
 import mentorController from '../controllers/mentorController';
 import sessionController from '../controllers/sessionController';

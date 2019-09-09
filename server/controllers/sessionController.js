@@ -27,6 +27,7 @@ const sessionController = {
       const message = 'undefined';
       return Helper.handleSuccess(res, status, message, allSessions);
     }
+    const allSessions = sessionModel.findSessions();
 
     const status = 200;
     const message = 'undefined';
