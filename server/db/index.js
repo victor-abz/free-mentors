@@ -69,6 +69,11 @@ class Database {
     return result;
   }
 
+  async findByMultipleProp(table, column1, value1, column2, value2) {
+    const {rows: result} = await con.query(`SELECT * FROM ${table} WHERE ${column1}='${value1}' AND ${column2} = '${value2}'`);
+    return result;
+  }
+
   async changeToMentor(role, id, res) {
     const alreadyMentor = await this.findByProp('users', 'userId', (parseInt(id)));
     const index = alreadyMentor.rows[0];
