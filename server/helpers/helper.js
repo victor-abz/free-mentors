@@ -28,13 +28,6 @@ const Helper = {
   },
   // Handle on Success Responses
   handleSuccess(res, status, message, data) {
-    if (message === 'undefined') {
-      return res.status(status).json({
-        status: status,
-        data
-      })
-    }
-
     return res.status(status).json({
       status: status,
       message: message,

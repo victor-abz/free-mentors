@@ -17,9 +17,6 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
       "semi": ["error", "always"],
       "quotes": ["error", "single"]

@@ -1,31 +1,23 @@
-import userModel from '../models/userAuth';
+// import userModel from '../models/userAuth';
 import Helper from '../helpers/helper';
-// import myTest from '../../myfile';
+import Db from '../db';
 
 const userAuthController = {
-  createUser: (req, res) => {
-    userModel.createUser(req.body, res);
-  },
+  createUser: (req, res) => new Db().addUser(req.body, res),
   // Login User
-  loginUser(req, res) {
-    userModel.loginUser(req.body, res);
+  loginUser: (req, res) => {
+    new Db().loginUser(req.body, res);
   },
   // Updating Data
-  changeToMentor: (req, res) => {
-    userModel.changeToMentor(req.userData.role, req.params.userId, res);
-  },
+  changeToMentor: (req, res) => new Db().changeToMentor('mentor', req.params.userId, res),
 
   // Getting All Users
   getUsers: (req, res) => {
     if (req.userData.role === 'admin') {
-      const users = userModel.findUsers();
-      const status = 200;
-      const message = 'All Users Fetched';
-      return Helper.handleSuccess(res, status, message, users);
+      const result = new Db().findAll('users', res);
+      return result;
     }
-    const status = 401;
-    const error = 'Insufficient provilege. Please sign in';
-    return Helper.handleError(res, status, error);
+    return Helper.handleError(res, 401, 'Insufficient provilege. Please sign in');
   },
 };
 

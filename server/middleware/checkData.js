@@ -1,10 +1,11 @@
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import mentorModel from '../models/mentors';
-import userModel from '../models/userAuth';
+// import mentorModel from '../models/mentors';
+// import userModel from '../models/userAuth';
 import Helper from '../helpers/helper';
-import url from 'url'
-import sessionModel from '../models/sessions'
+// import url from 'url'
+// import sessionModel from '../models/sessions'
+import db from '../db'
 
 const checkData = {
 // Check if Email is Valid
@@ -19,15 +20,21 @@ const checkData = {
   },
 
 
-  userExist(req, res, next) {
-    const allUsers = userModel.findUsers();
-    const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
+  async userExist(req, res, next) {
+    // const allUsers = userModel.findUsers();
+    // const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
 
-    if(req.path == '/auth/login' && userExist){
+    const userExist = await new db().findUsers('users','email', req.body.email);
+		// if(result.rows[0].count === '0'){
+		// 	await this.addUser(new User('admin@freementors.com', 'Admin', 'Super', '$2b$08$GJqUT02XgD.4JEyQzIF2zufHCGRpbJrWwZhXBdSQBVTRYp9L3qb2q', 'Kigali -Rwanda', 'Nyarugenege', 'Node Js', '5 years', 'Admin'));
+		// }
+
+
+    if(req.path == '/auth/login' && userExist.rows[0].count !== '0'){
      return next();
     }
     if(req.path === '/auth/signup'){
-      if(userExist){
+      if(userExist.rows[0].count !== '0'){
         const status = 400;
         const error = 'User Exist';
         return Helper.handleError(res, status, error);
