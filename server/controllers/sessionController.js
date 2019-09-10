@@ -1,36 +1,24 @@
 import sessionModel from '../models/sessions';
 import reviewModel from '../models/review';
 import Helper from '../helpers/helper';
+import Db from '../db';
 
 const sessionController = {
-  // Creating Session
-  createSessions: (req, res) => {
-    const data = sessionModel.createSession(req.body, req.userData);
-    const status = 201;
-    const message = 'Session request was sent, waiting mentor approval';
-    return Helper.handleSuccess(res, status, message, data);
+  createSessions: async (req, res) => {
+    const data = await new Db().createSession(req.body, req.userData);
+    return Helper.handleSuccess(res, 201, 'Session request was sent, waiting mentor approval', data);
   },
-  // Getting All data
-  getSessions: (req, res) => {
-    const roles = ['user', 'mentor', 'admin'];
-    const userRole = Helper.getRole(req.userData.role);
+  getSessions: async (req, res) => {
 
-    if (roles.indexOf(req.userData.role) === -1) {
-      const status = 401;
-      const error = 'Insufficient provilege. Please sign in';
-      return Helper.handleError(res, status, error);
-    }
-    const allSessions = sessionModel.findSessions();
-    const userSessions = Helper.filterObjectByProp(allSessions, userRole, req.userData.userId);
-    if (req.userData.role === 'admin') {
-      const status = 200;
-      const message = 'undefined';
-      return Helper.handleSuccess(res, status, message, allSessions);
-    }
+    const {userId, role}  = req.userData
+    console.log(role)
 
-    const status = 200;
-    const message = 'undefined';
-    return Helper.handleSuccess(res, status, message, userSessions);
+    const data = await new Db().findByProp('sessions','menteeId', userId);
+    if (role === 'admin') {
+      const allSessions = await new Db().findAll('sessions');
+      return Helper.handleSuccess(res, 200, 'All Sessions', allSessions);
+    }
+    return Helper.handleSuccess(res, 200, 'Your sessions', data);
   },
 
 
