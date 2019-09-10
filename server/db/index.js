@@ -93,6 +93,21 @@ class Database {
     return result;
   }
 
+  async createSession(sessionData, userData) {
+    const {mentorId, questions} = sessionData
+    const {userId: menteeId, email:menteeEmail}  = userData
+  	const newSession = await con.query(`Insert into sessions
+  		 (mentorId, menteeId, questions, menteeEmail, status) values(
+  		'${mentorId}',
+  		'${menteeId}',
+  		'${questions}',
+  		'${menteeEmail}',
+  		'pending'
+    ) returning *`);
+    const {rows: result} = newSession 
+    return result;
+  }
+
   async createTables() {
     await con.query(`
             CREATE TABLE IF NOT EXISTS USERS (userId SERIAL,firstName VARCHAR(250),lastName VARCHAR(250),email VARCHAR(250), password VARCHAR(250), address VARCHAR (30), bio VARCHAR(250), occupation VARCHAR(250), expertise VARCHAR(250), role VARCHAR(250),PRIMARY KEY(userId));

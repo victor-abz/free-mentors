@@ -1,53 +1,33 @@
 import sessionModel from '../models/sessions';
 import reviewModel from '../models/review';
 import Helper from '../helpers/helper';
+import Db from '../db';
 
 const sessionController = {
-  // Creating Session
-  createSessions: (req, res) => {
-    const data = sessionModel.createSession(req.body, req.userData);
-    const status = 201;
-    const message = 'Session request was sent, waiting mentor approval';
-    return Helper.handleSuccess(res, status, message, data);
+  createSessions: async (req, res) => {
+    const data = await new Db().createSession(req.body, req.userData);
+    return Helper.handleSuccess(res, 201, 'Session request was sent, waiting mentor approval', data);
   },
-  // Getting All data
-  getSessions: (req, res) => {
-    const roles = ['user', 'mentor', 'admin'];
-    const userRole = Helper.getRole(req.userData.role);
-
-    if (roles.indexOf(req.userData.role) === -1) {
-      const status = 401;
-      const error = 'Insufficient provilege. Please sign in';
-      return Helper.handleError(res, status, error);
+  getSessions: async (req, res) => {
+    const { userId, role } = req.userData;
+    const data = await new Db().findByProp('sessions', 'menteeId', userId);
+    if (role === 'admin') {
+      const allSessions = await new Db().findAll('sessions');
+      return Helper.handleSuccess(res, 200, 'All Sessions', allSessions);
     }
-    const allSessions = sessionModel.findSessions();
-    const userSessions = Helper.filterObjectByProp(allSessions, userRole, req.userData.userId);
-    if (req.userData.role === 'admin') {
-      const status = 200;
-      const message = 'undefined';
-      return Helper.handleSuccess(res, status, message, allSessions);
-    }
-
-    const status = 200;
-    const message = 'undefined';
-    return Helper.handleSuccess(res, status, message, userSessions);
+    return Helper.handleSuccess(res, 200, 'Your sessions', data);
   },
 
-
-  // Accept Session
   acceptSession: (req, res) => {
     sessionModel.changeStatus('Accepted', req.params.sessionId, res);
   },
-  // Reject Session
+
   rejectSession: (req, res) => {
     sessionModel.changeStatus('Rejected', req.params.sessionId, res);
   },
+  
+  createReview: (req, res) => reviewModel.createReview(req.body, req.params.sessionId, req.userData, res),
 
-  createReview: (req, res) => {
-    return reviewModel.createReview(req.body, req.params.sessionId, req.userData, res);
-  },
-
-  // Deleting Data
   deleteReview: (req, res) => {
     if (req.userData.role === 'admin') {
       return reviewModel.deleteReview(req.params.sessionId, res);

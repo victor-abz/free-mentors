@@ -1,10 +1,6 @@
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import mentorModel from '../models/mentors';
-import userModel from '../models/userAuth';
 import Helper from '../helpers/helper';
-import url from 'url'
-import sessionModel from '../models/sessions'
+import Db from '../db'
 
 const checkData = {
 // Check if Email is Valid
@@ -19,15 +15,14 @@ const checkData = {
   },
 
 
-  userExist(req, res, next) {
-    const allUsers = userModel.findUsers();
-    const userExist = Helper.findObjectByProp(allUsers, 'email', req.body.email)
-
-    if(req.path == '/auth/login' && userExist){
+  async userExist(req, res, next) {
+    const  rows = await new Db().findByProp('users', 'email', req.body.email)  
+    const {0: userExist} = rows
+    if(req.path == '/auth/login' && userExist !== '0'){
      return next();
     }
     if(req.path === '/auth/signup'){
-      if(userExist){
+      if(userExist !== '0'){
         const status = 400;
         const error = 'User Exist';
         return Helper.handleError(res, status, error);
