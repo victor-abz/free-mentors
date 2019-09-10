@@ -1,31 +1,36 @@
-import userModel from '../models/userAuth';
 import Helper from '../helpers/helper';
-// import myTest from '../../myfile';
+import Db from '../db';
 
 const userAuthController = {
-  createUser: (req, res) => {
-    userModel.createUser(req.body, res);
+  createUser: async (req, res) => {
+    const results = await new Db().addUser(req.body)
+    const {0: result} = results
+    console.log(result)
+    return Helper.handleSuccess(res, 201, 'User created successfully', result);
   },
-  // Login User
-  loginUser(req, res) {
-    userModel.loginUser(req.body, res);
-  },
-  // Updating Data
-  changeToMentor: (req, res) => {
-    userModel.changeToMentor(req.userData.role, req.params.userId, res);
+  loginUser: async (req, res) => {
+    const result = await new Db().loginUser(req.body)
+    if (result === 'error') {
+      return Helper.handleError(res, 400, 'The credentials you provided is incorrect');
+    } 
+    return Helper.handleSuccess(res, 200, 'User is successfully logged in', result);
   },
 
-  // Getting All Users
-  getUsers: (req, res) => {
-    if (req.userData.role === 'admin') {
-      const users = userModel.findUsers();
-      const status = 200;
-      const message = 'All Users Fetched';
-      return Helper.handleSuccess(res, status, message, users);
+  changeToMentor: async (req, res) => {
+    const result = await new Db().changeToMentor('mentor', req.params.userId)
+    if (result === 'mentor') {
+      return Helper.handleError(res, 400, 'Already a Mentor');
     }
-    const status = 401;
-    const error = 'Insufficient provilege. Please sign in';
-    return Helper.handleError(res, status, error);
+    const data = {message: 'User account changed to mentor'}
+    return Helper.handleSuccess(res, 200, 'Success', data);
+  },
+
+  getUsers: async (req, res) => {
+    if (req.userData.role === 'admin') {
+      const results = await new Db().findAll('users');
+      return Helper.handleSuccess(res, 200, `All Users Fetched`, results);
+    }
+    return Helper.handleError(res, 401, 'Insufficient provilege. Please sign in');
   },
 };
 
