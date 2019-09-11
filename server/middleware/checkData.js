@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Helper from '../helpers/helper';
 import Db from '../db'
+import Joi from '@hapi/joi'
 
 const checkData = {
 // Check if Email is Valid
@@ -13,7 +14,20 @@ const checkData = {
       }
       next();
   },
-
+  validate : (schema, property) => { 
+    return (req, res, next) => { 
+      const { error } = Joi.validate(req[property], schema);
+      const valid = error == null; 
+  
+    if (valid) { 
+      next(); 
+    } else { 
+      const { details } = error; 
+      const message = details.map(i => i.message).join(',');  
+      console.log("error", message); 
+     res.status(422).json({ error: message }) } 
+    } 
+  }, 
 
   async userExist(req, res, next) {
     const  rows = await new Db().findByProp('users', 'email', req.body.email)  
@@ -22,7 +36,7 @@ const checkData = {
      return next();
     }
     if(req.path === '/auth/signup'){
-      if(userExist !== '0'){
+      if(userExist){
         const status = 400;
         const error = 'User Exist';
         return Helper.handleError(res, status, error);

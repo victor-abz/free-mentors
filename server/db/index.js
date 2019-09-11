@@ -110,12 +110,39 @@ class Database {
 
   async createTables() {
     await con.query(`
-            CREATE TABLE IF NOT EXISTS USERS (userId SERIAL,firstName VARCHAR(250),lastName VARCHAR(250),email VARCHAR(250), password VARCHAR(250), address VARCHAR (30), bio VARCHAR(250), occupation VARCHAR(250), expertise VARCHAR(250), role VARCHAR(250),PRIMARY KEY(userId));
+            CREATE TABLE IF NOT EXISTS 
+            users (
+              userId SERIAL PRIMARY KEY,
+              firstName VARCHAR(250) NOT NULL,
+              lastName VARCHAR(250),
+              email VARCHAR(250) NOT NULL UNIQUE, 
+              password VARCHAR(250) NOT NULL, 
+              address VARCHAR (30) NOT NULL, 
+              bio VARCHAR(250) NOT NULL, 
+              occupation VARCHAR(250) NOT NULL, 
+              expertise VARCHAR(250) NOT NULL, 
+              role VARCHAR(250) NOT NULL
+            );
 
-            CREATE TABLE IF NOT EXISTS SESSIONS (sessionId SERIAL,menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,menteeEmail VARCHAR(300),status VARCHAR(250),PRIMARY KEY (sessionId));
+            CREATE TABLE IF NOT EXISTS 
+            sessions (
+              sessionId SERIAL,
+              menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+              mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+              menteeEmail VARCHAR(60),
+              status VARCHAR(20) NOT NULL,
+              PRIMARY KEY (sessionId));
 
-            CREATE TABLE IF NOT EXISTS REVIEWS (sessionId INTEGER REFERENCES sessions(sessionId) ON DELETE CASCADE,menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,menteefirstName VARCHAR(300),menteelastName VARCHAR(300),remark VARCHAR(300));
-        `);
+            CREATE TABLE IF NOT EXISTS 
+            reviews (
+              sessionId INTEGER REFERENCES sessions(sessionId) ON DELETE CASCADE,
+              mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+              menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+              score INTEGER NOT NULL,
+              menteeFullName VARCHAR(200) NOT NULL,
+              remark VARCHAR(300));
+              
+              `);
 
     const result = await this.findUsers('users', 'email', process.env.ADMIN_MAIL);
     if (result.rows[0].count === '0') {
