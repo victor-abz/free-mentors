@@ -54,7 +54,34 @@ const checkData = {
       req.userData = decoded;
       next();
     })
-  },
+  }, 
+
+  async doesExist(req, res, next) {
+     const path = req.originalUrl.replace(/\?.*$/, '');
+     console.log(req.route.path)
+     console.log(req.baseUrl)
+     if(req.baseUrl === '/api/v1/sessions') {
+      const sessionData = await new Db().findByProp('sessions', 'sessionId', req.params.sessionId)
+      if(sessionData.length === 0) {
+        return Helper.handleError(res, 404, 'session not Found');
+      } 
+      next()
+     }
+     if(req.baseUrl === '/api/v1/users') {
+      const sessionData = await new Db().findByProp('users', 'userId', req.params.userId)
+      if(sessionData.length === 0) {
+        return Helper.handleError(res, 404, 'The user doesn\'t exist');
+      } 
+      next()
+     }  
+     if(req.baseUrl === '/api/v1/mentors') {
+      const sessionData = await new Db().findByMultipleProp('users', 'userId', req.params.mentorId, 'role', 'mentor')
+      if(sessionData.length === 0) {
+        return Helper.handleError(res, 404, 'The user doesn\'t exist');
+      } 
+      next()
+     }           
+   }
 }
 
 

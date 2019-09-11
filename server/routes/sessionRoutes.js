@@ -8,9 +8,9 @@ const session = express.Router();
 // Sessions Routes
 session.post('/',checkData.validate(schema.postSession, 'body'), checkData.verifyToken, sessionController.createSessions);
 session.get('/', checkData.verifyToken, sessionController.getSessions);
-session.patch('/:sessionId/accept',checkData.validate(schema.sessParams, 'params'), checkData.verifyToken,  sessionController.changeSessionStatus);
-session.patch('/:sessionId/reject',checkData.validate(schema.sessParams, 'params'), checkData.verifyToken, sessionController.changeSessionStatus);
-session.post('/:sessionId/review',checkData.validate(schema.sessParams, 'params'), checkData.verifyToken,  sessionController.createReview);
-session.delete('/:sessionId/review',checkData.validate(schema.sessParams, 'params'), checkData.verifyToken, sessionController.deleteReview);
+session.patch('/:sessionId/accept',checkData.validate(schema.sessParams, 'params'), checkData.doesExist, checkData.verifyToken,  sessionController.changeSessionStatus);
+session.patch('/:sessionId/reject',checkData.validate(schema.sessParams, 'params'), checkData.doesExist, checkData.verifyToken, sessionController.changeSessionStatus);
+session.post('/:sessionId/review',checkData.validate(schema.sessParams, 'params'), checkData.doesExist, checkData.verifyToken,  sessionController.createReview);
+session.delete('/:sessionId/review',checkData.validate(schema.sessParams, 'params'), checkData.doesExist, checkData.verifyToken, sessionController.deleteReview);
 
 export default session;

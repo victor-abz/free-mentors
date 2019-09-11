@@ -8,7 +8,7 @@ const users = express.Router();
 
 users.get('/', checkData.verifyToken, userAuthController.getUsers);
 
-users.patch('/:userId',checkData.validate(schema.userParams, 'params'), checkData.verifyToken, userAuthController.changeToMentor);
+users.patch('/:userId',checkData.validate(schema.userParams, 'params'), checkData.doesExist, checkData.verifyToken, userAuthController.changeToMentor);
 
 
 export default users;

@@ -48,7 +48,6 @@ class Database {
     const {email, password: inputPassword} = data
     
     const rows = await this.findByProp('users', 'email', email);
-    console.log(rows)
     const [{userid: userId, firstname, lastname, password, role }] = rows
 
     if (!Helper.comparePassword(password, inputPassword)) {
@@ -120,10 +119,16 @@ class Database {
   async createReview(reviewData, sessionId, userData) {
     const {score, remark} = reviewData
     const { fullName}  = userData
-    const sessionData = await this.findByProp('sessions','sessionId', sessionId)
-    const [{sessionid, menteeid, mentorid}] = sessionData
-    console.log(sessionid, menteeid, mentorid)
-  	const newReview = await con.query(`Insert into reviews
+    // const sessionData = await this.findByProp('sessions','sessionId', sessionId)
+    // if(sessionData.length === 0) {
+    //   return 'error';
+    // } else {
+      const isReviewed = await this.findByProp('reviews','sessionId', sessionId)
+      if(isReviewed.length !== 0) {
+        return 'reviewed'
+      }
+      const [{sessionid, menteeid, mentorid, status}] = sessionData
+  	  const newReview = await con.query(`Insert into reviews
   		 (sessionId, mentorId, menteeId, score, menteeFullName, remark) values(
   		'${sessionid}',
   		'${mentorid}',
@@ -134,6 +139,8 @@ class Database {
     ) returning *`);
     const {rows: result} = newReview 
     return result;
+    // }
+    
   }
 
   async deleteReview(id) {

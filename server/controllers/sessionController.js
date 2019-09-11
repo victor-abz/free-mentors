@@ -35,8 +35,12 @@ const sessionController = {
   },
   
   createReview: async (req, res) => {
-    // reviewModel.createReview(req.body, req.params.sessionId, req.userData, res)
     const data = await new Db().createReview(req.body, req.params.sessionId, req.userData);
+    if(data === 'error') {
+      return Helper.handleError(res, 404, 'session not found');
+    } if(data === 'reviewed') {
+      return Helper.handleError(res, 400, 'You can\'t review again');
+    }
     return Helper.handleSuccess(res, 201, 'Thank you for reviewing. Kudos', data);
   },
 
