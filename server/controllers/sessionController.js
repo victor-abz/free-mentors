@@ -18,23 +18,31 @@ const sessionController = {
     return Helper.handleSuccess(res, 200, 'Your sessions', data);
   },
 
-  acceptSession: (req, res) => {
-    sessionModel.changeStatus('Accepted', req.params.sessionId, res);
-  },
-
-  rejectSession: (req, res) => {
-    sessionModel.changeStatus('Rejected', req.params.sessionId, res);
+  changeSessionStatus: async (req, res) => {
+    const isPending = await new Db().findByMultipleProp('sessions', 'sessionid', req.params.sessionId, 'status', 'pending');
+    if (isPending.length === 0) {
+      return Helper.handleError(res, 400, 'You are not allowed to change the status of this session');
+    } else {
+    if (req.path === `/${req.params.sessionId}/accept`){
+      const result = await new Db().changeStatus(req.params.sessionId, 'accepted')
+      const data = {message: `Session is now Accepted`}
+      return Helper.handleSuccess(res, 200, 'Success', data);
+    }
+    const result = await new Db().changeStatus(req.params.sessionId, 'rejected')
+    const data = {message: `Session is now Rejected`}
+    return Helper.handleSuccess(res, 200, 'Success', data);
+    }   
   },
   
-  createReview: (req, res) => reviewModel.createReview(req.body, req.params.sessionId, req.userData, res),
+  createReview: async (req, res) => {
+    // reviewModel.createReview(req.body, req.params.sessionId, req.userData, res)
+    const data = await new Db().createReview(req.body, req.params.sessionId, req.userData);
+    return Helper.handleSuccess(res, 201, 'Thank you for reviewing. Kudos', data);
+  },
 
-  deleteReview: (req, res) => {
-    if (req.userData.role === 'admin') {
-      return reviewModel.deleteReview(req.params.sessionId, res);
-    }
-    const status = 401;
-    const error = 'You are not allowed to change status';
-    return Helper.handleError(res, status, error);
+  deleteReview: async (req, res) => {
+   const result = await new Db().deleteReview(req.params.sessionId);
+    return Helper.handleSuccess(res, 201, 'Review Succesfully Deleted');
   },
 
 };

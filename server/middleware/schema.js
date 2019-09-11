@@ -19,7 +19,7 @@ const schema ={
     }),
     postSession: Joi.object().keys({
         mentorId: Joi.number().min(1).required(), 
-        Questions: Joi.string().min(3).max(30).required()
+        questions: Joi.string().min(3).max(30).required()
     }),
 
     userParams: Joi.object().keys({
