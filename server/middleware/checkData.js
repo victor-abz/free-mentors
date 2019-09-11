@@ -4,16 +4,7 @@ import Db from '../db'
 import Joi from '@hapi/joi'
 
 const checkData = {
-// Check if Email is Valid
-  isValidEmail(req, res, next) {
-    if (!(/\S+@\S+\.\S+/.test(req.body.email))) {
-          return res.status(400).json({
-            status: 400,
-            error: 'Please enter a valid email address',
-          });
-      }
-      next();
-  },
+
   validate : (schema, property) => { 
     return (req, res, next) => { 
       const { error } = Joi.validate(req[property], schema);
@@ -25,7 +16,8 @@ const checkData = {
       const { details } = error; 
       const message = details.map(i => i.message).join(',');  
       console.log("error", message); 
-     res.status(422).json({ error: message }) } 
+     res.status(400).json({ error: message }) } 
+
     } 
   }, 
 
@@ -48,8 +40,7 @@ const checkData = {
     const error = 'User not Found, Please Signup';
     return Helper.handleError(res, status, error);
   },
-
-// Verify token 
+ 
   verifyToken(req,res, next) {
     const token = req.headers['token'];
     if(!token) return res.status(401).json({
@@ -60,22 +51,10 @@ const checkData = {
         auth: false,
         message: 'failed to authenticate token'
       });
-      // res.status(200).send(decoded);
       req.userData = decoded;
       next();
     })
   },
- 
- // Check Required Fields before submit
-  checkInput: (req, res, next) => {    
-    if (!req.body.email || !req.body.password) {
-      const status = 400;
-      const error = 'Some Values are missing';
-      return Helper.handleError(res, status, error);
-    } 
-    next();
-  },
-
 }
 
 

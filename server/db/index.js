@@ -48,12 +48,14 @@ class Database {
     const {email, password: inputPassword} = data
     
     const rows = await this.findByProp('users', 'email', email);
-    const [{userid: userId, password, role}] = rows
+    console.log(rows)
+    const [{userid: userId, firstname, lastname, password, role }] = rows
 
     if (!Helper.comparePassword(password, inputPassword)) {
       return ('error');
     } 
-    const payload = {userId, email, role };
+    const fullName = `${firstname} ${lastname}`
+    const payload = {userId,fullName, email, role };
     const token = Helper.generateToken(payload);
     return token;
   }
@@ -108,6 +110,39 @@ class Database {
     return result;
   }
 
+
+  async changeStatus(id, changeTo) {
+    const result = await con.query(`UPDATE sessions SET status = '${changeTo}' WHERE sessionid = ${id};`);
+    const {0: rows} = result    
+    return  rows;
+  }
+
+  async createReview(reviewData, sessionId, userData) {
+    const {score, remark} = reviewData
+    const { fullName}  = userData
+    const sessionData = await this.findByProp('sessions','sessionId', sessionId)
+    const [{sessionid, menteeid, mentorid}] = sessionData
+    console.log(sessionid, menteeid, mentorid)
+  	const newReview = await con.query(`Insert into reviews
+  		 (sessionId, mentorId, menteeId, score, menteeFullName, remark) values(
+  		'${sessionid}',
+  		'${mentorid}',
+  		'${menteeid}',
+  		'${score}',
+      '${fullName}',
+      '${remark}'
+    ) returning *`);
+    const {rows: result} = newReview 
+    return result;
+  }
+
+  async deleteReview(id) {
+    const result = await con.query(`DELETE FROM reviews where sessionId = ${id}`);
+    const {0: rows} = result    
+    return  rows;
+  }
+
+
   async createTables() {
     await con.query(`
             CREATE TABLE IF NOT EXISTS 
@@ -128,6 +163,7 @@ class Database {
             sessions (
               sessionId SERIAL,
               menteeId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+              questions VARCHAR(250) NOT NULL,
               mentorId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
               menteeEmail VARCHAR(60),
               status VARCHAR(20) NOT NULL,
