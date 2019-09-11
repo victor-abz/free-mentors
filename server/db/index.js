@@ -110,6 +110,7 @@ class Database {
     return result;
   }
 
+
   async changeStatus(id, changeTo) {
     const result = await con.query(`UPDATE sessions SET status = '${changeTo}' WHERE sessionid = ${id};`);
     const {0: rows} = result    
@@ -140,6 +141,7 @@ class Database {
     const {0: rows} = result    
     return  rows;
   }
+
 
   async createTables() {
     await con.query(`

@@ -4,6 +4,7 @@ import Db from '../db'
 import Joi from '@hapi/joi'
 
 const checkData = {
+
   validate : (schema, property) => { 
     return (req, res, next) => { 
       const { error } = Joi.validate(req[property], schema);
@@ -16,6 +17,7 @@ const checkData = {
       const message = details.map(i => i.message).join(',');  
       console.log("error", message); 
      res.status(400).json({ error: message }) } 
+
     } 
   }, 
 
