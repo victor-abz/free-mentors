@@ -7,7 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import mocks from './server/test/mocks/create.mocks'
 
 const creating= async() => {
-  await mocks.dropAll();
+  // await mocks.dropAll();
   await mocks.createTables();
   await mocks.databaseData();
 }
