@@ -1,32 +1,24 @@
-// src/usingDB/controllers/Helper.js
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const Helper = {
-  // Hash Password
   hashPassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
   },
-  // Compare password
   comparePassword(hashPassword, password) {
     return bcrypt.compareSync(password, hashPassword);
   },
-
-  // Generate token
   generateToken(data) {
     const token = jwt.sign(data, 'free-mentors', { expiresIn: '7d' }
     );
     return token;
   },
-
   findObjectByProp(arr, prop, val) {
     return arr.find(obj => obj[prop] === val);
   },
-
   filterObjectByProp(arr, prop, val) {
     return arr.filter(obj => obj[prop] === val);
   },
-  // Handle on Success Responses
   handleSuccess(res, status, message, data) {
     if (message === 'undefined') {
       return res.status(status).json({

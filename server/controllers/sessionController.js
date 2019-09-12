@@ -1,5 +1,3 @@
-import sessionModel from '../models/sessions';
-import reviewModel from '../models/review';
 import Helper from '../helpers/helper';
 import Db from '../db';
 

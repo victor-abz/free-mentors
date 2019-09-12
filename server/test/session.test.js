@@ -1,14 +1,10 @@
-// Import the dependencies for testing
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import Db from '../db/';
 import setupdb from './mocks/create.mocks'
 
 import app from '../../app';
-import sessions from '../models/sessions';
-import mocks from './mocks/mocks';
 import dbmock from './mocks/db.mocks'
-// Configure chai
 chai.use(chaiHttp);
 
 const router = () => chai.request(app);
