@@ -57,9 +57,6 @@ const checkData = {
   }, 
 
   async doesExist(req, res, next) {
-     const path = req.originalUrl.replace(/\?.*$/, '');
-     console.log(req.route.path)
-     console.log(req.baseUrl)
      if(req.baseUrl === '/api/v1/sessions') {
       const sessionData = await new Db().findByProp('sessions', 'sessionId', req.params.sessionId)
       if(sessionData.length === 0) {

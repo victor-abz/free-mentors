@@ -18,12 +18,15 @@ const userAuthController = {
   },
 
   changeToMentor: async (req, res) => {
-    const result = await new Db().changeToMentor('mentor', req.params.userId)
-    if (result === 'mentor') {
-      return Helper.handleError(res, 400, 'Already a Mentor');
+    if (req.userData.role === 'admin') {
+      const result = await new Db().changeToMentor('mentor', req.params.userId)
+      if (result === 'mentor') {
+        return Helper.handleError(res, 400, 'Already a Mentor');
+      }
+      const data = {message: 'User account changed to mentor'}
+      return Helper.handleSuccess(res, 200, 'Success', data);
     }
-    const data = {message: 'User account changed to mentor'}
-    return Helper.handleSuccess(res, 200, 'Success', data);
+    return Helper.handleError(res, 401, 'Insufficient provilege. Please sign in');
   },
 
   getUsers: async (req, res) => {
