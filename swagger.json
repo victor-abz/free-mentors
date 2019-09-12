@@ -1,86 +1,470 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2.0",
-        "title": "free Mentor",
-        " description": "Free mentors",
-        "description": "Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.",
-        "license": {
-           "name" : "ISC",
-            "url": "http://www.google.com"
-       }
+      "description": "Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions",
+      "version": "1.0.0",
+      "title": "Free Mentors",
+      "contact": {
+        "email": "svicky.shema@gmail.com"
+      },
+      "license": {
+        "name": "Open source",
+        "url": "https://free-mentors-adc.herokuapp.com/"
+      }
     },
-    "basepath":"/api/v1",
-    "tags" : [
-        {
-            "name": "users",
-            "description":"User Can register and login"
-        },
-        {
-            "name": "mentors",
-            "description":"Mentor User"
-        },
-        {
-            "name": "Sessions",
-            "description":"Mentor User"
-        }
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "user",
+        "description": "Operations about user"
+      },
+      {
+        "name": "mentors",
+        "description": "Everything about your mentors"
+      },
+      {
+        "name": "sessions",
+        "description": "Everything about your Pets"
+      }
     ],
-    "schemes" : [
-        "http",
-        "https"
-    ],
-    "consumes": [
-        "application/json"
+    "schemes": [
+      "https",
+      "http"
     ],
     "paths": {
-        "/auth/login" : {
-            "post": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "login a user",
-                "parameters" : [{
-                    "name": "Users",
-                    "in": "body",
-                    "description": "user provide input",
-                    "schema": {
-                        "$ref": "#definitions/signup"
-
-                    }
-                }],
-                "produces": [
-                    "application/json"
-                ],
-                "response" : {
-                    "201": {
-                        "description": "User succesfully created"
-                    },
-                    "401": {
-                        "description": "Authentication error"
-                    }
-
-                }
-
+      "/auth/signup": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Create user",
+          "description": "This can be done by any user who wants to register.",
+          "operationId": "create User",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Sign up",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
             }
+          ],
+          "responses": {
+            "default": {
+              "description": "User created successfully"
+            }
+          }
         }
-
+      },
+      "/auth/signin": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Logs user into the system",
+          "description": "",
+          "operationId": "signin",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "query",
+              "description": "The email for login",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "in": "query",
+              "description": "The password for login containing text and numbers",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User is successfully logged in"
+            },
+            "400": {
+              "description": "Invalid username/password supplied"
+            }
+          }
+        }
+      },
+      "/users/{userId}": {
+        "patch": {
+          "tags": [
+            "user"
+          ],
+          "summary": "change user to mentor",
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "The id of user that needs to be made to mentor. Use 3 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User account changed to mentor"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Mentor not found"
+            }
+          }
+        }
+      },
+      "/mentors": {
+        "get": {
+          "tags": [
+            "mentors"
+          ],
+          "summary": "Returns all mentors",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/allMentors"
+              }
+            }
+          }
+        }
+      },
+      "/mentors/{mentorId}": {
+        "get": {
+          "tags": [
+            "mentors"
+          ],
+          "summary": "Get mentor by mentor Id",
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "mentorId",
+              "in": "path",
+              "description": "The id of mentor that needs to be fetched. Use 2 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Mentor not found"
+            }
+          }
+        }
+      },
+      "/sessions": {
+        "post": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "User can request session with mentor",
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Session request",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Session"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "Get all session ",
+          "description": "For a user (mentee) : The response should be a list of all mentorship request sessions created by the user.  For a mentor : The response should be a list of all mentorship request sessions created against the mentor.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Session not found"
+            }
+          }
+        }
+      },
+      "/sessions/{sessionId}/accept": {
+        "patch": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "Accept a session",
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "sessionId",
+              "in": "path",
+              "description": "The id of session to accept. Use 2 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Session not found"
+            }
+          }
+        }
+      },
+      "/sessions/{sessionId}/reject": {
+        "patch": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "Reject a session",
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "sessionId",
+              "in": "path",
+              "description": "The id of session to reject. Use 4 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Session not found"
+            }
+          }
+        }
+      },
+      "/sessions/{sessionId}/review": {
+        "post": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "Review a mentor after a mentorship session.",
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "sessionId",
+              "in": "path",
+              "description": "The id of session to review. Use 5 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Session not found"
+            }
+          }
+        }
+      },
+      "/sessions/{sessionId}/delete": {
+        "delete": {
+          "tags": [
+            "sessions"
+          ],
+          "summary": "Delete review",
+          "description": "Admin can delete mentorship session review deemed inappropriate",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "sessionId",
+              "in": "path",
+              "description": "The id of session to review. Use 5 for testing. ",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid id supplied"
+            },
+            "404": {
+              "description": "Session not found"
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "token": {
+        "type": "basic"
+      }
     },
     "definitions": {
-        "signup": {
-            "required" : [
-                "email",
-                "password"
-            ],
-            "type":"object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                }
-            }
+      "User": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "expertise": {
+            "type": "string"
+          }
         }
-
+      },
+      "allMentors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "mentorId": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "bio": {
+              "type": "string"
+            },
+            "occupation": {
+              "type": "string"
+            },
+            "expertise": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "mentorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questions": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
     }
-}
+  }

@@ -4,9 +4,6 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-import db from './server/db'
-
-new db().createTables();
 
 import routes from './server/routes/index';
 import myError from './server/middleware/error';

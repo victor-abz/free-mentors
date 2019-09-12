@@ -19,7 +19,8 @@ const sessionController = {
   },
 
   changeSessionStatus: async (req, res) => {
-    const isPending = await new Db().findByMultipleProp('sessions', 'sessionid', req.params.sessionId, 'status', 'pending');
+    console.log(`${req.params.sessionId} I am here`)
+    const isPending = await new Db().findByMultipleProp('sessions', 'sessionid', parseInt(req.params.sessionId), 'status', 'pending');
     if (isPending.length === 0) {
       return Helper.handleError(res, 400, 'You are not allowed to change the status of this session');
     } else {

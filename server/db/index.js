@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import Helper from '../helpers/helper';
 
+
 dotenv.config();
 
 const con = new Pool({
@@ -119,10 +120,7 @@ class Database {
   async createReview(reviewData, sessionId, userData) {
     const {score, remark} = reviewData
     const { fullName}  = userData
-    // const sessionData = await this.findByProp('sessions','sessionId', sessionId)
-    // if(sessionData.length === 0) {
-    //   return 'error';
-    // } else {
+    const sessionData = await this.findByProp('sessions','sessionId', sessionId)
       const isReviewed = await this.findByProp('reviews','sessionId', sessionId)
       if(isReviewed.length !== 0) {
         return 'reviewed'
@@ -138,15 +136,16 @@ class Database {
       '${remark}'
     ) returning *`);
     const {rows: result} = newReview 
-    return result;
-    // }
-    
+    return result;    
   }
 
   async deleteReview(id) {
     const result = await con.query(`DELETE FROM reviews where sessionId = ${id}`);
     const {0: rows} = result    
     return  rows;
+  }
+  async dropTables() {
+    await con.query('DROP TABLE IF EXISTS users, sessions, reviews CASCADE'); 
   }
 
 

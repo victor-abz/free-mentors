@@ -8,7 +8,7 @@ const schema ={
         email: Joi.string().email({ minDomainSegments: 2 }).required(),
         password: Joi.string().regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).required(),
         address: Joi.string().min(3).max(144).required(),
-        bio: Joi.string().alphanum().min(3).max(144).required(),
+        bio: Joi.string().min(3).max(144).required(),
         occupation: Joi.string().min(3).max(30).required(),
         expertise: Joi.string().min(3).max(50).required()
     }),
