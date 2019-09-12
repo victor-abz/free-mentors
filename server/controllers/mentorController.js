@@ -1,4 +1,3 @@
-import mentorModel from '../models/mentors';
 import Helper from '../helpers/helper';
 import Db from '../db';
 

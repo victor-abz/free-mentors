@@ -3,11 +3,7 @@ import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 
 import app from '../../app';
-import mocks from './mocks/mocks';
-import setupdb from './mocks/create.mocks'
-import Db from '../db/';
 import dbmock from './mocks/db.mocks'
-// Configure chai
 chai.use(chaiHttp);
 let token = null;
 

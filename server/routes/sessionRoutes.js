@@ -5,7 +5,6 @@ import schema from '../middleware/schema'
 
 const session = express.Router();
 
-// Sessions Routes
 session.post('/',checkData.validate(schema.postSession, 'body'), checkData.verifyToken, sessionController.createSessions);
 session.get('/', checkData.verifyToken, sessionController.getSessions);
 session.patch('/:sessionId/accept',checkData.validate(schema.sessParams, 'params'), checkData.doesExist, checkData.verifyToken,  sessionController.changeSessionStatus);

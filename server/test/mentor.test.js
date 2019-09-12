@@ -15,6 +15,7 @@ let allMentors = null;
 
 describe('Mentor test', () => {
   beforeEach( async() => {
+    // this.timeout(0)
     await setupdb.dropAll()
     await setupdb.databaseData();
     allMentors = await new Db().findByProp('users','role', 'mentor');   

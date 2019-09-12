@@ -1,10 +1,6 @@
-// Import the dependencies for testing
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
-
 import app from '../../app';
-import sessions from '../models/sessions';
-// Configure chai
 chai.use(chaiHttp);
 
 const router = () => chai.request(app);
