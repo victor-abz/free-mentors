@@ -10,3 +10,7 @@ script:
   - "npm test"
 after_success: 
   npm run coverage
+services:
+  - postgresql
+before_script:
+  - psql -c 'CREATE DATABASE testdb;' -U postgres
