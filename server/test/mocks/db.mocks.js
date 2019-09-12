@@ -97,6 +97,10 @@ const data = {
         email: 'admin@freementors.com',
         password: 'mentor123',
     },
+    mentorlogin: {
+        email: 'mentor@freementors.com',
+        password: 'mentor123',
+    },
     signup: {
         'firstName': 'mentor',
         'lastName': 'mentor',

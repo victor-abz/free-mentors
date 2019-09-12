@@ -15,7 +15,7 @@ const router = () => chai.request(app);
 let token = null;
 let adminToken = null;
 let sessionId = null;
-
+let mentorToken = null;
 describe('Review', () => {
   
   beforeEach(async () => {
@@ -55,19 +55,19 @@ describe('Review', () => {
         done(error);
       });
   });
-  it('should login an admin', (done) => {
+  it('should login a mentor', (done) => {
     router()
       .post('/api/v1/auth/login')
-      .send(dbmock.adminlogin)
+      .send(dbmock.mentorlogin)
       .end((error, response) => {
-        adminToken = response.body.data;
+        mentorToken = response.body.data;
         done(error)
       });
   });
   it('Should reject session', (done) => {
     router()
       .patch(`/api/v1/sessions/${sessionId}/reject`)
-      .set('token', token)
+      .set('token', mentorToken)
       .end((error, response) => {
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');

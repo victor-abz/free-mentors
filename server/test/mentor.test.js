@@ -17,16 +17,13 @@ describe('Mentor test', () => {
   beforeEach( async() => {
     await setupdb.dropAll()
     await setupdb.databaseData();
-    allMentors = await new Db().findByProp('users','role', 'mentor');
-    
+    allMentors = await new Db().findByProp('users','role', 'mentor');   
     mentorId = allMentors[0].userid;
-
-    
   });
   it('should login a user', (done) => {
     router()
       .post('/api/v1/auth/login')
-      .send(dbmock.userlogin)
+      .send(dbmock.mentorlogin)
       .end((error, response) => {
         token = response.body.data;
         done(error)
