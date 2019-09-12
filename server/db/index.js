@@ -136,9 +136,7 @@ class Database {
       '${remark}'
     ) returning *`);
     const {rows: result} = newReview 
-    return result;
-    // }
-    
+    return result;    
   }
 
   async deleteReview(id) {
