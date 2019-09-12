@@ -29,6 +29,9 @@ const userAuthController = {
   getUsers: async (req, res) => {
     if (req.userData.role === 'admin') {
       const results = await new Db().findAll('users');
+      results.forEach(mentor => {
+        delete mentor.password
+      });
       return Helper.handleSuccess(res, 200, `All Users Fetched`, results);
     }
     return Helper.handleError(res, 401, 'Insufficient provilege. Please sign in');

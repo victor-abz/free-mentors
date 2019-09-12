@@ -6,8 +6,12 @@ import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import mocks from './server/test/mocks/create.mocks'
 
-mocks.databaseData();
-
+const creating= async() => {
+  await mocks.dropAll();
+  await mocks.createTables();
+  await mocks.databaseData();
+}
+creating();
 import routes from './server/routes/index';
 import myError from './server/middleware/error';
 import swaggerDocument from './swagger.json';

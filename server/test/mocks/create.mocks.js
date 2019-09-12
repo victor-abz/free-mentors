@@ -19,5 +19,6 @@ const createAll = {
     },
     dropAll : async() => await new db().dropTables(),
     acceptOne : async(sessionId) => await new db().changeStatus(sessionId, 'accepted'),
+    createTables: async () => await new db().createTables()
 }
 export default createAll;
