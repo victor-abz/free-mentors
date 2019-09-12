@@ -1,36 +1,44 @@
 // Import the dependencies for testing
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
+import Db from '../db/';
+import setupdb from './mocks/create.mocks'
 
 import app from '../../app';
 import sessions from '../models/sessions';
 import mocks from './mocks/mocks';
+import dbmock from './mocks/db.mocks'
 // Configure chai
 chai.use(chaiHttp);
 
 const router = () => chai.request(app);
 let token = null;
+let adminToken = null;
 let sessionId = null;
 
-describe('Session test', () => {
-  beforeEach(() => {
-    const allSessions = sessions.findSessions();
-    sessionId = allSessions[0].sessionId;
-    // console.log(sessionId)
+describe('Review', () => {
+  
+  beforeEach(async () => {
+    await setupdb.dropAll()
+    await setupdb.databaseData();
+    const allSessions = await new Db().findAll('sessions');
+    sessionId = allSessions[0].sessionid;
   });
-  it('should login a user', () => {
+  
+  it('should login a user', (done) => {
     router()
       .post('/api/v1/auth/login')
-      .send(mocks.testLogin)
+      .send(dbmock.userlogin)
       .end((error, response) => {
-        token = response.body.data.token;
+        token = response.body.data;
+        done(error)
       });
   });
   it('should create session', (done) => {
     router()
       .post('/api/v1/sessions')
       .set('token', token)
-      .send(mocks.sessionData)
+      .send(dbmock.sessionData4)
       .end((error, response) => {
         expect(response).to.have.status(201);
         expect(response.body).to.be.a('object');
@@ -47,20 +55,32 @@ describe('Session test', () => {
         done(error);
       });
   });
+  it('should login an admin', (done) => {
+    router()
+      .post('/api/v1/auth/login')
+      .send(dbmock.adminlogin)
+      .end((error, response) => {
+        adminToken = response.body.data;
+        done(error)
+      });
+  });
   it('should accept session', (done) => {
     router()
-      .patch(`/api/v1/sessions/${sessionId}/accept`)
-      .set('token', token)
+      .patch(`/api/v1/sessions/${sessionid}/accept`) 
+      // console.log(`this is ${sessionId}`)    
+      .set('token', adminToken)
       .end((error, response) => {
+        console.log('sdjhs--->',error)
         expect(response).to.have.status(200);
         expect(response.body).to.be.a('object');
 
         done(error);
+        console.log(error)
       });
   });
   it('Should reject session', (done) => {
     router()
-      .patch(`/api/v1/sessions/${sessionId + 1}/reject`)
+      .patch(`/api/v1/sessions/${sessionId}/reject`)
       .set('token', token)
       .end((error, response) => {
         expect(response).to.have.status(200);
@@ -72,7 +92,9 @@ describe('Session test', () => {
 
   it('Should not reject session that was accepted reject session', (done) => {
     router()
-      .patch(`/api/v1/sessions/${sessionId}/reject`)
+    console.log(sessionId+1)
+    
+      .patch(`/api/v1/sessions/${sessionId+2}/reject`)
       .set('token', token)
       .end((error, response) => {
         expect(response).to.have.status(401);

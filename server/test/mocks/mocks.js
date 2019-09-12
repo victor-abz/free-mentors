@@ -19,7 +19,7 @@ const mocks = {
       firstName: 'admin',
       lastName: 'test',
       email: 'admin@freementors.com',
-      password: '$2b$08$GJqUT02XgD.4JEyQzIF2zufHCGRpbJrWwZhXBdSQBVTRYp9L3qb2q',
+      password: '$2b$08$dO813RDLiGL0bYzjKVNCxORSLeP7h.lXfuFkzUKF8JrLh4wgR.wem',
       address: 'Kigali',
       bio: 'Passionate about IT',
       occupation: 'Developer',
@@ -31,7 +31,7 @@ const mocks = {
       firstName: 'mentor',
       lastName: 'testee',
       email: 'mentor@freementors.com',
-      password: '$2b$08$GJqUT02XgD.4JEyQzIF2zufHCGRpbJrWwZhXBdSQBVTRYp9L3qb2q',
+      password: '$2b$08$dO813RDLiGL0bYzjKVNCxORSLeP7h.lXfuFkzUKF8JrLh4wgR.wem',
       address: 'Uganda',
       bio: 'Failed I am not a robot test',
       occupation: 'Software Engineer',
@@ -43,7 +43,7 @@ const mocks = {
       firstName: 'mentee',
       lastName: 'tester',
       email: 'mente@freementors.com',
-      password: '$2b$08$GJqUT02XgD.4JEyQzIF2zufHCGRpbJrWwZhXBdSQBVTRYp9L3qb2q',
+      password: '$2b$08$dO813RDLiGL0bYzjKVNCxORSLeP7h.lXfuFkzUKF8JrLh4wgR.wem',
       address: 'Kigali-Rwanda',
       bio: 'EveryThing',
       occupation: 'Developer',
@@ -53,11 +53,11 @@ const mocks = {
   ],
   testLogin: {
     email: 'admin@freementors.com',
-    password: 'mentor',
+    password: 'mentor123',
   },
   falseTestLogin: {
     email: 'adminfreementors.com',
-    password: 'mentor',
+    password: 'mentor123',
   },
 
   sessionData: {

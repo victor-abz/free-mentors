@@ -4,9 +4,9 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-import db from './server/db'
+// import mocks from './server/test/mocks/create.mocks'
 
-new db().createTables();
+// mocks.databaseData();
 
 import routes from './server/routes/index';
 import myError from './server/middleware/error';

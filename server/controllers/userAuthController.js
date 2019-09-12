@@ -4,7 +4,10 @@ import Db from '../db';
 const userAuthController = {
   createUser: async (req, res) => {
     const results = await new Db().addUser(req.body)
-    return Helper.handleSuccess(res, 201, 'User created successfully', results);
+    const {0: user} = results
+    const token = Helper.generateToken(user);
+    const data = {message: 'User created successfully', token: token}
+    return Helper.handleSuccess(res, 201, 'User created successfully', data);
   },
   loginUser: async (req, res) => {
     const result = await new Db().loginUser(req.body)
