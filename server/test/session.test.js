@@ -64,20 +64,6 @@ describe('Review', () => {
         done(error)
       });
   });
-  it('should accept session', (done) => {
-    router()
-      .patch(`/api/v1/sessions/${sessionid}/accept`) 
-      // console.log(`this is ${sessionId}`)    
-      .set('token', adminToken)
-      .end((error, response) => {
-        console.log('sdjhs--->',error)
-        expect(response).to.have.status(200);
-        expect(response.body).to.be.a('object');
-
-        done(error);
-        console.log(error)
-      });
-  });
   it('Should reject session', (done) => {
     router()
       .patch(`/api/v1/sessions/${sessionId}/reject`)
@@ -90,17 +76,4 @@ describe('Review', () => {
       });
   });
 
-  it('Should not reject session that was accepted reject session', (done) => {
-    router()
-    console.log(sessionId+1)
-    
-      .patch(`/api/v1/sessions/${sessionId+2}/reject`)
-      .set('token', token)
-      .end((error, response) => {
-        expect(response).to.have.status(401);
-        expect(response.body).to.be.a('object');
-
-        done(error);
-      });
-  });
 });
