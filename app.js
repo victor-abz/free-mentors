@@ -4,7 +4,7 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-// import mocks from './server/test/mocks/create.mocks'
+import mocks from './server/test/mocks/create.mocks'
 
 mocks.databaseData();
 
