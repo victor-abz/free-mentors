@@ -1,13 +1,11 @@
-// Import the dependencies for testing
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import Db from '../db/'
 
 import app from '../../app';
-// import mentors from '../models/mentors';
-import mocks from './mocks/mocks';
 import dbmock from './mocks/db.mocks'
-// Configure chai
+import setupdb from './mocks/create.mocks'
+
 chai.use(chaiHttp);
 let token = null;
 
@@ -17,6 +15,8 @@ let allMentors = null;
 
 describe('Mentor test', () => {
   beforeEach( async() => {
+    await setupdb.dropAll()
+    await setupdb.databaseData();
     allMentors = await new Db().findByProp('users','role', 'mentor');
     
     mentorId = allMentors[0].userid;

@@ -121,9 +121,6 @@ class Database {
     const {score, remark} = reviewData
     const { fullName}  = userData
     const sessionData = await this.findByProp('sessions','sessionId', sessionId)
-    // if(sessionData.length === 0) {
-    //   return 'error';
-    // } else {
       const isReviewed = await this.findByProp('reviews','sessionId', sessionId)
       if(isReviewed.length !== 0) {
         return 'reviewed'

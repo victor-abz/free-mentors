@@ -4,13 +4,7 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-import mocks from './server/test/mocks/create.mocks'
 
-const creating= async() => {
-  await mocks.createTables();
-  await mocks.databaseData();
-}
-creating();
 import routes from './server/routes/index';
 import myError from './server/middleware/error';
 import swaggerDocument from './swagger.json';
