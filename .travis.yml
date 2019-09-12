@@ -13,4 +13,4 @@ after_success:
 services:
   - postgresql
 before_script:
-  - psql -c 'CREATE DATABASE testdb;' -U postgres
+  - psql -c 'CREATE DATABASE free_mentors;' -U postgres

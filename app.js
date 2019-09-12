@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 // import mocks from './server/test/mocks/create.mocks'
 
-// mocks.databaseData();
+mocks.databaseData();
 
 import routes from './server/routes/index';
 import myError from './server/middleware/error';
