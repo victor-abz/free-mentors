@@ -13,4 +13,5 @@ after_success:
 services:
   - postgresql
 before_script:
-  - psql -c 'CREATE DATABASE free_mentors;' -U postgres
+  - psql -c "CREATE DATABASE free_mentors;" -U postgres
+  - psql -c "CREATE USER victor WITH PASSWORD '1234';" -U postgres
