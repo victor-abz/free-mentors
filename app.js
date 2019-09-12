@@ -4,14 +4,19 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-
 import routes from './server/routes/index';
 import myError from './server/middleware/error';
 import swaggerDocument from './swagger.json';
+import data from './server/test/mocks/create.mocks'
 
 const port = process.env.PORT || 3000;
 const app = express(); 
 const server = http.createServer(app);
+const make = async() => {
+  await data.dropAll()
+  await data.databaseData()
+}
+make();
 
 dotenv.config();
 
