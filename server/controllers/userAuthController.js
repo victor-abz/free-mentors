@@ -6,15 +6,16 @@ const userAuthController = {
     const results = await new Db().addUser(req.body)
     const {0: user} = results
     const token = Helper.generateToken(user);
-    const data = {message: 'User created successfully', token: token}
+    const data = {token: token}
     return Helper.handleSuccess(res, 201, 'User created successfully', data);
   },
   loginUser: async (req, res) => {
     const result = await new Db().loginUser(req.body)
+    const data = {token: result}
     if (result === 'error') {
       return Helper.handleError(res, 400, 'The credentials you provided is incorrect');
     } 
-    return Helper.handleSuccess(res, 200, 'User is successfully logged in', result);
+    return Helper.handleSuccess(res, 200, 'User is successfully logged in', data);
   },
 
   changeToMentor: async (req, res) => {

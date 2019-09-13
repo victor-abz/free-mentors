@@ -43,7 +43,7 @@ After Session, Users will be reviewing the session and the Admin will have to ta
 * User can request mentoring session
 
 ## API USage for this project
-### **api/v1/auth/signup**
+### **api/v2/auth/signup**
 Able to post a request for sign up
 
 Request body should be
@@ -71,7 +71,7 @@ RESPONSE 201
 ​   “message”:​​“User created successfully”​,
 }
 ```
-### **API/v1/auth/signin**
+### **API/v2/auth/signin**
 Post a request for sign in
 
 Request body should be
@@ -94,7 +94,7 @@ Response:
   }
 }
 ```
-### **API/v1/user/:userId** 
+### **API/v2/user/:userId** 
 Admin can change a user to mentor
 
 Request should be Header with
@@ -113,7 +113,7 @@ Response with status code: 200 OK
   }
 }
 ```
-### **API/v1/mentors**
+### **API/v2/mentors**
 User is able to get all mentors 
 
 Request should be Header with
@@ -151,7 +151,7 @@ The Response payload should have the following shape
 ​      ​} ,]
 }
 ```
-### **API/v1/mentors/:mentorId**
+### **API/v2/mentors/:mentorId**
 User will be able to GET specific mentor
 
 Request should be Header with
@@ -179,7 +179,7 @@ The Response payload should have the following shape
 }
 ```
 
-### **POST API/v1/sessions**
+### **POST API/v2/sessions**
 A user is able to Create Session Request
 
 Request should have Header with
@@ -212,7 +212,7 @@ RESPONSE
 }
 ```
 
-### **API/v1/sessions/:sessionId/accept**
+### **API/v2/sessions/:sessionId/accept**
 THEN a I should be able to Accept a session
 **DEV Notes**
 Request body should be Header with
@@ -238,7 +238,7 @@ RESPONSE
 }
 ```
 
-### **API/v1/sessions/:sessionId/reject**
+### **API/v2/sessions/:sessionId/reject**
 THEN a I should be able to Decline a session
 **DEV Notes**
 Request body should be Header with
@@ -264,7 +264,7 @@ RESPONSE
 }
 ```
 
-### **API/v1/sessions**
+### **API/v2/sessions**
 THEN User  should be able to view all requested session by hime if it is a mentor then He should see all session addressed to him
 **DEV Notes**
 Request body should be Header with
@@ -299,7 +299,7 @@ RESPONSE
 }
 ```
 
-### **API/v1/sessions/:sessionId/review**
+### **API/v2/sessions/:sessionId/review**
 THEN User  should be able to review the session with a rate between 1 to 5
 **DEV Notes**
 Request body should be Header with
@@ -331,7 +331,7 @@ RESPONSE
 ```
 
 
-### **API/v1/sessions/:sessionId/review**
+### **API/v2/sessions/:sessionId/review**
 THEN a I should be able to Delete a review with that Id
 **DEV Notes**
 Request body should be Header with

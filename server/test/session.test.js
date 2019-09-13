@@ -23,16 +23,16 @@ describe('Review', () => {
   
   it('should login a user', (done) => {
     router()
-      .post('/api/v1/auth/login')
+      .post('/api/v2/auth/login')
       .send(dbmock.userlogin)
       .end((error, response) => {
-        token = response.body.data;
+        token = response.body.data.token;
         done(error)
       });
   });
   it('should create session', (done) => {
     router()
-      .post('/api/v1/sessions')
+      .post('/api/v2/sessions')
       .set('token', token)
       .send(dbmock.sessionData4)
       .end((error, response) => {
@@ -43,7 +43,7 @@ describe('Review', () => {
   });
   it('should get list of sessions', (done) => {
     router()
-      .get('/api/v1/sessions')
+      .get('/api/v2/sessions')
       .set('token', token)
       .end((error, response) => {
         expect(response).to.have.status(200);
@@ -53,16 +53,16 @@ describe('Review', () => {
   });
   it('should login a mentor', (done) => {
     router()
-      .post('/api/v1/auth/login')
+      .post('/api/v2/auth/login')
       .send(dbmock.mentorlogin)
       .end((error, response) => {
-        mentorToken = response.body.data;
+        mentorToken = response.body.data.token;
         done(error)
       });
   });
   it('Should reject session', (done) => {
     router()
-      .patch(`/api/v1/sessions/${sessionId}/reject`)
+      .patch(`/api/v2/sessions/${sessionId}/reject`)
       .set('token', mentorToken)
       .end((error, response) => {
         expect(response).to.have.status(200);
