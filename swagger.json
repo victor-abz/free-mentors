@@ -12,7 +12,7 @@
         "url": "https://free-mentors-adc.herokuapp.com/"
       }
     },
-    "basePath": "/api/v1",
+    "basePath": "/api/v2",
     "tags": [
       {
         "name": "user",

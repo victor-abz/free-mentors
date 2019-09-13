@@ -39,7 +39,7 @@ class Database {
       '${occupation}',
       '${expertise}',
       'user'
-        ) RETURNING firstName, lastName,email,  address, bio, occupation, expertise`);
+        ) RETURNING userid,firstName,email, role`);
     const {rows} = newUser
     return rows;
   }
