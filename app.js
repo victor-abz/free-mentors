@@ -8,6 +8,7 @@ import routes from './server/routes/index';
 import myError from './server/middleware/error';
 import swaggerDocument from './swagger.json';
 import data from './server/test/mocks/create.mocks'
+import cors from 'cors';
 
 const port = process.env.PORT || 3000;
 const app = express(); 
@@ -23,6 +24,7 @@ const server = http.createServer(app);
 dotenv.config();
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
